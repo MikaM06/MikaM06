@@ -1,5 +1,5 @@
 <h2 align="left">Hi 👋! My name is Louhan and I'm a developer, from France</h2>
-<h3 align="left">Founder from EarthQuest server</h2>
+<h2 align="left">Founder from EarthQuest server</h2>
 
 ###
 
@@ -31,11 +31,11 @@
 
 <!--START_SECTION:waka-->
 
-```txt
-Java  3 hrs 36 mins   ███████████████████████████████   100 %
-JavaScript   3 hrs 36 mins   ███████████████████▓░░░░░   78.98 %
-JSON         29 mins         ██▓░░░░░░░░░░░░░░░░░░░░░░   10.76 %
-```
+<h3 align="left">Java: Operational</h2>
+<h3 align="left">JavaScript: 75%</h2>
+<h3 align="left">Web: Askip</h2>
+<h3 align="left">"Comment faire un serveur minecraft ?" https://url-r.fr/bEOnI</h2>
+
 
 <!--END_SECTION:waka-->
 
