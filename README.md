@@ -31,11 +31,15 @@
 
 <!--START_SECTION:waka-->
 
-<h3 align="left">Java: Operational</h2>
-<h3 align="left">JavaScript: 75%</h2>
-<h3 align="left">Web: Askip</h2>
-<h3 align="left">"Comment faire un serveur minecraft ?" https://url-r.fr/bEOnI</h2>
+```txt
+Java: Operational
+JavaScript: 75%
 
+English: 1%
+French: 100%
+
+How to be an entrepreneur? Buy my training on the link below (don't worry, I'm scamming) 😆 https://url-r.fr/bEOnI
+```
 
 <!--END_SECTION:waka-->
 
