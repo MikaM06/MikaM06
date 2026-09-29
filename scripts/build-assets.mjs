@@ -431,12 +431,18 @@ ${tags}
 
 // Carte de passion : texte et étiquettes à gauche, visuel animé à droite.
 const hobby = (t, { title, lines, tags, visual, style }) => {
+    // Les étiquettes passent à la ligne avant d'atteindre le visuel (x = 340).
     let x = 28;
+    let y = tags.length > 2 ? 128 : 160;
     const chips = tags.map((label) => {
         const w = label.length * 10 + 26;
-        const out = `<rect x="${x + 4}" y="${164}" width="${w}" height="32" fill="${t.deep}"/>`
-            + `<rect x="${x}" y="160" width="${w}" height="32" fill="${t.accent}"/>`
-            + `<text x="${x + w / 2}" y="181" text-anchor="middle" class="mono" font-size="13" font-weight="700" letter-spacing="1.5" fill="${t.onAccent}">${esc(label)}</text>`;
+        if (x + w > 340) {
+            x = 28;
+            y += 44;
+        }
+        const out = `<rect x="${x + 4}" y="${y + 4}" width="${w}" height="32" fill="${t.deep}"/>`
+            + `<rect x="${x}" y="${y}" width="${w}" height="32" fill="${t.accent}"/>`
+            + `<text x="${x + w / 2}" y="${y + 21}" text-anchor="middle" class="mono" font-size="13" font-weight="700" letter-spacing="1.5" fill="${t.onAccent}">${esc(label)}</text>`;
         x += w + 12;
         return out;
     }).join('');
@@ -449,18 +455,60 @@ ${visual}
 `, style);
 };
 
-// Faisceaux laser qui balaient depuis la scène.
+// Deux lyres suspendues à un pont en treillis, dont les faisceaux balaient la foule.
+const lyre = (t, px, cls) => {
+    const py = 72;
+    return `
+<g class="${cls}">
+  <polygon points="${px - 5},${py + 8} ${px + 5},${py + 8} ${px + 46},${py + 150} ${px - 46},${py + 150}" fill="url(#beam)"/>
+  <rect x="${px - 11}" y="${py - 7}" width="22" height="22" rx="4" fill="${t.line}"/>
+  <circle cx="${px}" cy="${py + 12}" r="6" fill="${t.accent2}"/>
+  <circle cx="${px}" cy="${py + 12}" r="3" fill="#FFFFFF"/>
+</g>
+<path d="M${px - 16} ${py - 22} V${py + 2} M${px + 16} ${py - 22} V${py + 2}" stroke="${t.muted}" stroke-width="4" stroke-linecap="round"/>
+<rect x="${px - 20}" y="${py - 30}" width="40" height="10" fill="${t.muted}"/>
+<rect x="${px - 5}" y="${py - 40}" width="10" height="10" fill="${t.line}"/>`;
+};
+
 const festivals = (t) => {
-    const beams = [0, 1, 2, 3, 4].map((i) =>
-        `<line class="beam" x1="480" y1="176" x2="${420 + i * 30}" y2="36" stroke="${i % 2 ? t.accent2 : t.accent}" stroke-width="3" style="animation-delay:-${(i * 0.3).toFixed(1)}s"/>`).join('');
+    let truss = `<rect x="340" y="26" width="226" height="6" fill="${t.line}"/><rect x="340" y="38" width="226" height="6" fill="${t.line}"/>`;
+    for (let x = 340; x < 562; x += 16) {
+        truss += `<path d="M${x} 32 L${x + 8} 38 L${x + 16} 32" fill="none" stroke="${t.line}" stroke-width="2"/>`;
+    }
+    let crowd = '';
+    for (let i = 0; i < 12; i++) {
+        const x = 350 + i * 18 + (i % 2) * 4;
+        const lift = i % 3 === 0 ? 6 : 0;
+        crowd += `<circle cx="${x}" cy="${196 - lift}" r="6" fill="${t.deep}"/><rect x="${x - 8}" y="${203 - lift}" width="16" height="14" rx="4" fill="${t.deep}"/>`;
+        if (i % 4 === 1) {
+            crowd += `<rect class="hand" x="${x + 5}" y="${176}" width="4" height="18" rx="2" fill="${t.deep}" style="animation-delay:-${(i * 0.1).toFixed(1)}s"/>`;
+        }
+    }
     return hobby(t, {
         title: 'Festivals',
         lines: ['Les festivals électro, surtout :'],
-        tags: ['PAROOKAVILLE', 'TOMORROWLAND'],
-        visual: `${beams}<rect x="436" y="176" width="88" height="14" fill="${t.line}"/><rect x="424" y="190" width="112" height="6" fill="${t.accent}"/>`,
+        tags: ['PAROOKAVILLE', 'TOMORROWLAND', 'DEFQON.1'],
+        visual: `
+<defs>
+  <linearGradient id="beam" gradientUnits="userSpaceOnUse" x1="0" y1="80" x2="0" y2="222">
+    <stop offset="0" stop-color="${t.accent2}" stop-opacity="0.85"/>
+    <stop offset="1" stop-color="${t.accent}" stop-opacity="0"/>
+  </linearGradient>
+  <clipPath id="stage"><rect x="330" y="6" width="244" height="212"/></clipPath>
+</defs>
+<g clip-path="url(#stage)">
+  ${lyre(t, 398, 'head left')}
+  ${lyre(t, 508, 'head right')}
+  ${crowd}
+</g>
+${truss}`,
         style: `
-  .beam { transform-origin: 480px 176px; animation: sweep 2.4s ease-in-out infinite alternate; }
-  @keyframes sweep { from { transform: rotate(-18deg); opacity: 0.9; } to { transform: rotate(18deg); opacity: 0.5; } }`,
+  .head { animation: sweep 2.4s ease-in-out infinite alternate; }
+  .left { transform-origin: 398px 84px; }
+  .right { transform-origin: 508px 84px; animation-direction: alternate-reverse; }
+  @keyframes sweep { from { transform: rotate(-28deg); } to { transform: rotate(28deg); } }
+  .hand { transform-box: fill-box; transform-origin: bottom; animation: jump 0.4s ease-in-out infinite alternate; }
+  @keyframes jump { from { transform: translateY(0); } to { transform: translateY(-4px); } }`,
     });
 };
 
