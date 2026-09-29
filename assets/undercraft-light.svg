@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300">
+<style>
+  .sans { font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  .mono { font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace; }
+  
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+
+
+<rect x="10" y="10" width="1188" height="288" fill="#D4262E"/>
+<rect x="1.5" y="1.5" width="1185" height="285" fill="#FFF6F5" stroke="#2A1215" stroke-width="3"/>
+<g opacity="0.6"><g class="">
+<polygon points="123,70 161.10399999999998,92 123,114 84.896,92" fill="#F2663B"/>
+<polygon points="84.896,92 123,114 123,158 84.896,136" fill="#D4262E"/>
+<polygon points="161.10399999999998,92 123,114 123,158 161.10399999999998,136" fill="#8C1A20"/>
+</g><g class="">
+<polygon points="85,136 123.104,158 85,180 46.896,158" fill="#F2663B"/>
+<polygon points="46.896,158 85,180 85,224 46.896,202" fill="#D4262E"/>
+<polygon points="123.104,158 85,180 85,224 123.104,202" fill="#8C1A20"/>
+</g><g class="">
+<polygon points="161,136 199.10399999999998,158 161,180 122.896,158" fill="#F2663B"/>
+<polygon points="122.896,158 161,180 161,224 122.896,202" fill="#D4262E"/>
+<polygon points="199.10399999999998,158 161,180 161,224 199.10399999999998,202" fill="#8C1A20"/>
+</g></g>
+<text x="232" y="112" class="sans" font-size="46" font-weight="800" fill="#2A1215">UnderCraft</text>
+<text x="232" y="152" class="sans" font-size="21" font-style="italic" fill="#D4262E">Là où tout a commencé.</text>
+<text x="232" y="198" class="sans" font-size="17" fill="#7A5A5E">Mon serveur avant EarthQuest, où j'ai écrit</text>
+<text x="232" y="224" class="sans" font-size="17" fill="#7A5A5E">mes premiers plugins et outils de modération.</text>
+<line x1="744" y1="48" x2="744" y2="240" stroke="#2A1215" stroke-width="2" opacity="0.25"/>
+<rect x="780" y="72" width="120" height="32" fill="#D4262E"/><text x="840" y="93" text-anchor="middle" class="mono" font-size="12" font-weight="700" letter-spacing="1" fill="#FFF6F5">RÔLE</text><text x="918" y="94" class="sans" font-size="18" font-weight="600" fill="#2A1215">Fondateur</text><rect x="780" y="124" width="120" height="32" fill="#D4262E"/><text x="840" y="145" text-anchor="middle" class="mono" font-size="12" font-weight="700" letter-spacing="1" fill="#FFF6F5">STATUT</text><text x="918" y="146" class="sans" font-size="18" font-weight="600" fill="#2A1215">Fermé en 2024</text><rect x="780" y="176" width="120" height="32" fill="#D4262E"/><text x="840" y="197" text-anchor="middle" class="mono" font-size="12" font-weight="700" letter-spacing="1" fill="#FFF6F5">SUITE</text><text x="918" y="198" class="sans" font-size="18" font-weight="600" fill="#2A1215">EarthQuest</text>
+
+</svg>

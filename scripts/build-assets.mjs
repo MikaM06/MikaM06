@@ -69,6 +69,12 @@ const GLYPHS = {
     A: ['01110', '10001', '10001', '11111', '10001', '10001', '10001'],
     0: ['01110', '10001', '10011', '10101', '11001', '10001', '01110'],
     6: ['00110', '01000', '10000', '11110', '10001', '10001', '01110'],
+    H: ['10001', '10001', '10001', '11111', '10001', '10001', '10001'],
+    U: ['10001', '10001', '10001', '10001', '10001', '10001', '01110'],
+    R: ['11110', '10001', '10001', '11110', '10100', '10010', '10001'],
+    C: ['01110', '10001', '10000', '10000', '10000', '10001', '01110'],
+    F: ['11111', '10000', '10000', '11110', '10000', '10000', '10000'],
+    T: ['11111', '00100', '00100', '00100', '00100', '00100', '00100'],
 };
 
 // Chaque pixel est un petit voxel : une face en dégradé et une ombre en dessous.
@@ -145,6 +151,7 @@ ${tail}
 const SECTIONS = [
     ['about', 'À propos'],
     ['earthquest', 'EarthQuest'],
+    ['before', 'Avant EarthQuest'],
     ['projects', 'Projets perso'],
     ['stack', 'Stack'],
     ['activity', 'Contributions'],
@@ -218,31 +225,125 @@ const PROJECTS = [
 
 // ─────────────────────────────────────────────────────────────── earthquest
 
-const FACTS = [
-    ['RÔLE', 'Fondateur'],
-    ['STRUCTURE', 'VoxelMind'],
-    ['JEU', 'Minecraft 1.7.10 moddé'],
-    ['SITE', 'earthquest.fr'],
-];
-
-const earthquest = (t) => {
-    let facts = '';
-    FACTS.forEach(([label, value], i) => {
-        const y = 58 + i * 52;
-        facts += `<rect x="780" y="${y}" width="120" height="32" fill="${t.accent}"/>`;
-        facts += `<text x="840" y="${y + 21}" text-anchor="middle" class="mono" font-size="12" font-weight="700" letter-spacing="1" fill="${t.onAccent}">${esc(label)}</text>`;
-        facts += `<text x="918" y="${y + 22}" class="sans" font-size="18" font-weight="600" fill="${t.text}">${esc(value)}</text>`;
+const server = (t, { icon, name, tagline, lines, facts }) => {
+    let right = '';
+    facts.forEach(([label, value], i) => {
+        const y = 150 - facts.length * 26 + i * 52;
+        right += `<rect x="780" y="${y}" width="120" height="32" fill="${t.accent}"/>`;
+        right += `<text x="840" y="${y + 21}" text-anchor="middle" class="mono" font-size="12" font-weight="700" letter-spacing="1" fill="${t.onAccent}">${esc(label)}</text>`;
+        right += `<text x="918" y="${y + 22}" class="sans" font-size="18" font-weight="600" fill="${t.text}">${esc(value)}</text>`;
     });
     return svg(1200, 300, `
 ${block(t, 0, 0, 1188, 288, 10)}
-<image href="data:image/png;base64,${LOGO}" x="48" y="64" width="150" height="150"/>
-<text x="232" y="112" class="sans" font-size="46" font-weight="800" fill="${t.text}">EarthQuest</text>
-<text x="232" y="152" class="sans" font-size="21" font-style="italic" fill="${t.accent}">Écris l'histoire du monde.</text>
-<text x="232" y="198" class="sans" font-size="17" fill="${t.muted}">Un serveur Minecraft moddé, avec son launcher,</text>
-<text x="232" y="224" class="sans" font-size="17" fill="${t.muted}">ses mods et ses outils faits maison.</text>
+${icon}
+<text x="232" y="112" class="sans" font-size="46" font-weight="800" fill="${t.text}">${esc(name)}</text>
+<text x="232" y="152" class="sans" font-size="21" font-style="italic" fill="${t.accent}">${esc(tagline)}</text>
+${lines.map((l, i) => `<text x="232" y="${198 + i * 26}" class="sans" font-size="17" fill="${t.muted}">${esc(l)}</text>`).join('\n')}
 <line x1="744" y1="48" x2="744" y2="240" stroke="${t.line}" stroke-width="2" opacity="0.25"/>
-${facts}
+${right}
 `);
+};
+
+const earthquest = (t) => server(t, {
+    icon: `<image href="data:image/png;base64,${LOGO}" x="48" y="64" width="150" height="150"/>`,
+    name: 'EarthQuest',
+    tagline: 'Écris l\'histoire du monde.',
+    lines: ['Un serveur Minecraft moddé, avec son launcher,', 'ses mods et ses outils faits maison.'],
+    facts: [['RÔLE', 'Fondateur'], ['STRUCTURE', 'VoxelMind'], ['JEU', 'Minecraft 1.7.10 moddé'], ['SITE', 'earthquest.fr']],
+});
+
+const undercraft = (t) => server(t, {
+    icon: `<g opacity="0.6">${cube(t, 123, 92, 44)}${cube(t, 85, 158, 44)}${cube(t, 161, 158, 44)}</g>`,
+    name: 'UnderCraft',
+    tagline: 'Là où tout a commencé.',
+    lines: ['Mon serveur avant EarthQuest, où j\'ai écrit', 'mes premiers plugins et outils de modération.'],
+    facts: [['RÔLE', 'Fondateur'], ['STATUT', 'Fermé en 2024'], ['SUITE', 'EarthQuest']],
+});
+
+// ─────────────────────────────────────────────────────────────── huracraft (rétro)
+
+// Texte pixel à plat, avec l'ombre décalée des polices Minecraft.
+const pixelFlat = (text, x0, y0, size, color, shadow) => {
+    let back = '';
+    let front = '';
+    [...text].forEach((ch, i) => {
+        GLYPHS[ch].forEach((row, r) => {
+            [...row].forEach((bit, c) => {
+                if (bit === '1') {
+                    const x = x0 + (i * 6 + c) * size;
+                    const y = y0 + r * size;
+                    back += `<rect x="${x + size}" y="${y + size}" width="${size}" height="${size}" fill="${shadow}"/>`;
+                    front += `<rect x="${x}" y="${y}" width="${size}" height="${size}" fill="${color}"/>`;
+                }
+            });
+        });
+    });
+    return back + front;
+};
+
+// Texte avec ombre portée, comme dans les menus du jeu.
+const mcText = (x, y, text, color, shadow, size = 20, anchor = 'start') =>
+    `<text x="${x + 2}" y="${y + 2}" text-anchor="${anchor}" class="mono" font-size="${size}" font-weight="700" fill="${shadow}">${esc(text)}</text>` +
+    `<text x="${x}" y="${y}" text-anchor="${anchor}" class="mono" font-size="${size}" font-weight="700" fill="${color}">${esc(text)}</text>`;
+
+const SWORD = [
+    '.............ooo',
+    '............owwo',
+    '...........owwgo',
+    '..........owwgo.',
+    '.........owwgo..',
+    '........owwgo...',
+    '.......owwgo....',
+    '..oo..owwgo.....',
+    '..oyooowgo......',
+    '...oyywgo.......',
+    '....oyyo........',
+    '...ohoyyo.......',
+    '..oho.oyo.......',
+    'oyho...oo.......',
+    'oyyo............',
+    'ooo.............',
+];
+const SWORD_COLORS = { o: '#1B1B1B', w: '#F2F2F2', g: '#A8A8A8', y: '#E0A526', h: '#6B4423' };
+
+const huracraft = () => {
+    const w = 1200;
+    const h = 240;
+    const cell = 24;
+    const dirt = ['#3B2A1C', '#46321F', '#4F3A24', '#352518', '#5A4129'];
+    let bg = '';
+    for (let y = 0; y < h; y += cell) {
+        for (let x = 0; x < w; x += cell) {
+            const n = (Math.imul(x + 7, 73856093) ^ Math.imul(y + 13, 19349663)) >>> 0;
+            bg += `<rect x="${x}" y="${y}" width="${cell}" height="${cell}" fill="${dirt[(n >>> 7) % dirt.length]}"/>`;
+        }
+    }
+    let sword = '';
+    SWORD.forEach((row, r) => {
+        [...row].forEach((ch, c) => {
+            if (ch !== '.') {
+                sword += `<rect x="${60 + c * 8}" y="${56 + r * 8}" width="8" height="8" fill="${SWORD_COLORS[ch]}"/>`;
+            }
+        });
+    });
+    const bars = [0, 1, 2, 3, 4].map((i) =>
+        `<rect x="${1086 + i * 10}" y="${58 - i * 6}" width="7" height="${10 + i * 6}" fill="#3F3F3F"/>`).join('');
+    return svg(w, h, `
+${bg}
+<rect width="${w}" height="${h}" fill="#000000" opacity="0.35"/>
+<rect x="24" y="24" width="${w - 48}" height="${h - 48}" fill="#000000" opacity="0.3" stroke="#808080" stroke-width="3"/>
+<rect x="48" y="44" width="152" height="152" fill="#000000" opacity="0.35"/>
+${sword}
+${pixelFlat('HURACRAFT', 236, 52, 6, '#FFAA00', '#3F2A00')}
+${mcText(236, 138, 'PvP Factions · Vanilla 1.8.9+', '#FFFF55', '#3F3F15')}
+${mcText(236, 174, 'Fondé par MikaM06', '#AAAAAA', '#2A2A2A', 18)}
+${bars}
+<text x="1066" y="80" text-anchor="middle" class="mono" font-size="22" font-weight="700" fill="#FF5555">✕</text>
+${mcText(1130, 138, 'Fermé en 2021', '#FF5555', '#3F1515', 18, 'end')}
+<text x="236" y="208" class="mono blink" font-size="14" font-weight="700" fill="#555555">Impossible de se connecter au serveur</text>
+`, `
+  .blink { animation: blink 2s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0.3; } }`);
 };
 
 // ─────────────────────────────────────────────────────────────── stack
@@ -287,6 +388,8 @@ for (const [mode, t] of Object.entries(THEMES)) {
         write(`projects/${id}-${mode}.svg`, card(t, p, i + 1));
     });
     write(`earthquest-${mode}.svg`, earthquest(t));
+    write(`undercraft-${mode}.svg`, undercraft(t));
+    write(`huracraft-${mode}.svg`, huracraft());
     write(`stack-${mode}.svg`, stack(t));
 }
 
