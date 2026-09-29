@@ -4,13 +4,13 @@
 -->
 
 <p align="center"><picture>
-  <source media="(prefers-color-scheme: light)" srcset="./assets/hero-light.svg?v=2"/>
-  <img src="./assets/hero-dark.svg?v=2" width="100%" alt="MikaM06 — Fondateur d'EarthQuest, CEO de VoxelMind, étudiant à Epitech"/>
+  <source media="(prefers-color-scheme: light)" srcset="./assets/hero-light.svg?v=mumr5hgy"/>
+  <img src="./assets/hero-dark.svg?v=mumr5hgy" width="100%" alt="MikaM06 — Fondateur d'EarthQuest, CEO de VoxelMind, étudiant à Epitech"/>
 </picture></p>
 
 <p align="center"><picture>
-  <source media="(prefers-color-scheme: light)" srcset="./assets/section-about-light.svg?v=2"/>
-  <img src="./assets/section-about-dark.svg?v=2" width="100%" alt="À propos"/>
+  <source media="(prefers-color-scheme: light)" srcset="./assets/section-about-light.svg?v=mumr5hgy"/>
+  <img src="./assets/section-about-dark.svg?v=mumr5hgy" width="100%" alt="À propos"/>
 </picture></p>
 
 Salut, moi c'est Louhan 👋
@@ -22,44 +22,44 @@ Je code autour de Minecraft depuis des années : des plugins, des mods, des outi
 <sub><code>BASE</code>&nbsp; Nantes &nbsp;&nbsp;&nbsp; <code>ÉQUIPE</code>&nbsp; <a href="https://github.com/EarthQuestMc">@EarthQuestMc</a> &nbsp;&nbsp;&nbsp; <code>ÉCOLE</code>&nbsp; Epitech · Tek1</sub>
 
 <p align="center"><picture>
-  <source media="(prefers-color-scheme: light)" srcset="./assets/section-earthquest-light.svg?v=2"/>
-  <img src="./assets/section-earthquest-dark.svg?v=2" width="100%" alt="VoxelMind"/>
+  <source media="(prefers-color-scheme: light)" srcset="./assets/section-earthquest-light.svg?v=mumr5hgy"/>
+  <img src="./assets/section-earthquest-dark.svg?v=mumr5hgy" width="100%" alt="VoxelMind"/>
 </picture></p>
 
 <p align="center"><a href="https://www.earthquest.fr"><picture>
-  <source media="(prefers-color-scheme: light)" srcset="./assets/earthquest-light.svg?v=2"/>
-  <img src="./assets/earthquest-dark.svg?v=2" width="100%" alt="EarthQuest — Écris l'histoire du monde. Serveur Minecraft 1.7.10 moddé, fondé par MikaM06, porté par VoxelMind. earthquest.fr"/>
+  <source media="(prefers-color-scheme: light)" srcset="./assets/earthquest-light.svg?v=mumr5hgy"/>
+  <img src="./assets/earthquest-dark.svg?v=mumr5hgy" width="100%" alt="EarthQuest — Écris l'histoire du monde. Serveur Minecraft 1.7.10 moddé, fondé par MikaM06, porté par VoxelMind. earthquest.fr"/>
 </picture></a></p>
 
 <p align="center"><picture>
-  <source media="(prefers-color-scheme: light)" srcset="./assets/section-before-light.svg?v=2"/>
-  <img src="./assets/section-before-dark.svg?v=2" width="100%" alt="Avant EarthQuest"/>
+  <source media="(prefers-color-scheme: light)" srcset="./assets/section-before-light.svg?v=mumr5hgy"/>
+  <img src="./assets/section-before-dark.svg?v=mumr5hgy" width="100%" alt="Avant EarthQuest"/>
 </picture></p>
 
 <p align="center"><picture>
-  <source media="(prefers-color-scheme: light)" srcset="./assets/undercraft-light.svg?v=2"/>
-  <img src="./assets/undercraft-dark.svg?v=2" width="100%" alt="Undercraft — marque déposée, mon serveur avant EarthQuest, fondé par MikaM06, fermé en 2024"/>
+  <source media="(prefers-color-scheme: light)" srcset="./assets/undercraft-light.svg?v=mumr5hgy"/>
+  <img src="./assets/undercraft-dark.svg?v=mumr5hgy" width="100%" alt="Undercraft — marque déposée, mon serveur avant EarthQuest, fondé par MikaM06, fermé en 2024"/>
 </picture></p>
 
-<p align="center"><img src="./assets/huracraft-dark.svg?v=2" width="100%" alt="HuraCraft — PvP Factions Vanilla 1.8.9+, fondé par MikaM06, fermé en 2021"/></p>
+<p align="center"><img src="./assets/huracraft-dark.svg?v=mumr5hgy" width="100%" alt="HuraCraft — PvP Factions Vanilla 1.8.9+, fondé par MikaM06, fermé en 2021"/></p>
 
 <p align="center"><picture>
-  <source media="(prefers-color-scheme: light)" srcset="./assets/herocrafts-light.svg?v=2"/>
-  <img src="./assets/herocrafts-dark.svg?v=2" width="100%" alt="Herocrafts — PvP Factions et mini-jeux en 1.12.2, MikaM06 y était admin jusqu’en mars 2022, fermé à l’été 2022"/>
+  <source media="(prefers-color-scheme: light)" srcset="./assets/herocrafts-light.svg?v=mumr5hgy"/>
+  <img src="./assets/herocrafts-dark.svg?v=mumr5hgy" width="100%" alt="Herocrafts — PvP Factions et mini-jeux en 1.12.2, MikaM06 y était admin jusqu’en mars 2022, fermé à l’été 2022"/>
 </picture></p>
 
 <p align="center"><picture>
-  <source media="(prefers-color-scheme: light)" srcset="./assets/section-projects-light.svg?v=2"/>
-  <img src="./assets/section-projects-dark.svg?v=2" width="100%" alt="Projets perso"/>
+  <source media="(prefers-color-scheme: light)" srcset="./assets/section-projects-light.svg?v=mumr5hgy"/>
+  <img src="./assets/section-projects-dark.svg?v=mumr5hgy" width="100%" alt="Projets perso"/>
 </picture></p>
 
 <p align="center">
-  <a href="https://github.com/MikaM06/Voxora"><picture><source media="(prefers-color-scheme: light)" srcset="./assets/projects/voxora-light.svg?v=2"/><img src="./assets/projects/voxora-dark.svg?v=2" width="49%" alt="Voxora · launcher Rust Modrinth et CurseForge"/></picture></a>
-  <a href="https://github.com/MikaM06/TeamSpeak6SoundBoard"><picture><source media="(prefers-color-scheme: light)" srcset="./assets/projects/soundboard-light.svg?v=2"/><img src="./assets/projects/soundboard-dark.svg?v=2" width="49%" alt="TeamSpeak 6 SoundBoard"/></picture></a>
+  <a href="https://github.com/MikaM06/Voxora"><picture><source media="(prefers-color-scheme: light)" srcset="./assets/projects/voxora-light.svg?v=mumr5hgy"/><img src="./assets/projects/voxora-dark.svg?v=mumr5hgy" width="49%" alt="Voxora · launcher Rust Modrinth et CurseForge"/></picture></a>
+  <a href="https://github.com/MikaM06/TeamSpeak6SoundBoard"><picture><source media="(prefers-color-scheme: light)" srcset="./assets/projects/soundboard-light.svg?v=mumr5hgy"/><img src="./assets/projects/soundboard-dark.svg?v=mumr5hgy" width="49%" alt="TeamSpeak 6 SoundBoard"/></picture></a>
 </p>
 <p align="center">
-  <a href="https://github.com/MikaM06/HubPlugin"><picture><source media="(prefers-color-scheme: light)" srcset="./assets/projects/hubplugin-light.svg?v=2"/><img src="./assets/projects/hubplugin-dark.svg?v=2" width="49%" alt="HubPlugin · lobby Minecraft 1.8"/></picture></a>
-  <a href="https://github.com/MikaM06/NoPhantom"><picture><source media="(prefers-color-scheme: light)" srcset="./assets/projects/nophantom-light.svg?v=2"/><img src="./assets/projects/nophantom-dark.svg?v=2" width="49%" alt="NoPhantom · plugin 1.13+"/></picture></a>
+  <a href="https://github.com/MikaM06/HubPlugin"><picture><source media="(prefers-color-scheme: light)" srcset="./assets/projects/hubplugin-light.svg?v=mumr5hgy"/><img src="./assets/projects/hubplugin-dark.svg?v=mumr5hgy" width="49%" alt="HubPlugin · lobby Minecraft 1.8"/></picture></a>
+  <a href="https://github.com/MikaM06/NoPhantom"><picture><source media="(prefers-color-scheme: light)" srcset="./assets/projects/nophantom-light.svg?v=mumr5hgy"/><img src="./assets/projects/nophantom-dark.svg?v=mumr5hgy" width="49%" alt="NoPhantom · plugin 1.13+"/></picture></a>
 </p>
 
 <details>
@@ -74,18 +74,18 @@ Je code autour de Minecraft depuis des années : des plugins, des mods, des outi
 </details>
 
 <p align="center"><picture>
-  <source media="(prefers-color-scheme: light)" srcset="./assets/section-stack-light.svg?v=2"/>
-  <img src="./assets/section-stack-dark.svg?v=2" width="100%" alt="Stack"/>
+  <source media="(prefers-color-scheme: light)" srcset="./assets/section-stack-light.svg?v=mumr5hgy"/>
+  <img src="./assets/section-stack-dark.svg?v=mumr5hgy" width="100%" alt="Stack"/>
 </picture></p>
 
 <p align="center"><picture>
-  <source media="(prefers-color-scheme: light)" srcset="./assets/stack-light.svg?v=2"/>
-  <img src="./assets/stack-dark.svg?v=2" width="100%" alt="Langages : Java, Rust, TypeScript, JavaScript, C · Minecraft : Forge 1.7.10, Bukkit/Spigot, Crucible · Web et apps : Tauri 2, Svelte 5, React, Node.js, Express, Vite · Outils : Git, Docker, Linux, Maven, Gradle"/>
+  <source media="(prefers-color-scheme: light)" srcset="./assets/stack-light.svg?v=mumr5hgy"/>
+  <img src="./assets/stack-dark.svg?v=mumr5hgy" width="100%" alt="Langages : Java, Rust, TypeScript, JavaScript, C · Minecraft : Forge 1.7.10, Bukkit/Spigot, Crucible · Web et apps : Tauri 2, Svelte 5, React, Node.js, Express, Vite · Outils : Git, Docker, Linux, Maven, Gradle"/>
 </picture></p>
 
 <p align="center"><picture>
-  <source media="(prefers-color-scheme: light)" srcset="./assets/section-activity-light.svg?v=2"/>
-  <img src="./assets/section-activity-dark.svg?v=2" width="100%" alt="Contributions"/>
+  <source media="(prefers-color-scheme: light)" srcset="./assets/section-activity-light.svg?v=mumr5hgy"/>
+  <img src="./assets/section-activity-dark.svg?v=mumr5hgy" width="100%" alt="Contributions"/>
 </picture></p>
 
 <p align="center"><picture>

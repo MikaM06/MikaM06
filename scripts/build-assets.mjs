@@ -439,4 +439,9 @@ for (const [mode, t] of Object.entries(THEMES)) {
     write(`stack-${mode}.svg`, stack(t));
 }
 
-console.log(`SVG générés dans ${OUT}`);
+// Nouveau numéro de version dans le README, pour que GitHub ne serve pas d'anciennes images en cache.
+const README = join(ROOT, 'README.md');
+const version = Date.now().toString(36);
+writeFileSync(README, readFileSync(README, 'utf8').replace(/(\.\/assets\/[a-z/-]+\.svg)(\?v=[0-9a-z]+)?/g, `$1?v=${version}`));
+
+console.log(`SVG générés dans ${OUT} (version ${version})`);
