@@ -262,103 +262,94 @@ const undercraft = (t) => server(t, {
 
 // ─────────────────────────────────────────────────────────────── huracraft (rétro)
 
-// Texte pixel à plat, avec l'ombre décalée des polices Minecraft.
-const pixelFlat = (text, x0, y0, size, color, shadow) => {
-    let back = '';
-    let front = '';
+// Texte pixel à plat, rempli avec `fill` (couleur ou url(#...)).
+const pixelFlat = (text, x0, y0, size, fill) => {
+    let out = '';
     [...text].forEach((ch, i) => {
         GLYPHS[ch].forEach((row, r) => {
             [...row].forEach((bit, c) => {
                 if (bit === '1') {
-                    const x = x0 + (i * 6 + c) * size;
-                    const y = y0 + r * size;
-                    const fg = typeof color === 'function' ? color(i) : color;
-                    const bg = typeof shadow === 'function' ? shadow(i) : shadow;
-                    back += `<rect x="${x + size}" y="${y + size}" width="${size}" height="${size}" fill="${bg}"/>`;
-                    front += `<rect x="${x}" y="${y}" width="${size}" height="${size}" fill="${fg}"/>`;
+                    out += `<rect x="${x0 + (i * 6 + c) * size}" y="${y0 + r * size}" width="${size}" height="${size}"/>`;
                 }
             });
         });
     });
-    return back + front;
+    return `<g fill="${fill}">${out}</g>`;
 };
 
-// Texte avec ombre portée, comme dans les menus du jeu.
-const mcText = (x, y, text, color, shadow, size = 20, anchor = 'start') =>
-    `<text x="${x + 2}" y="${y + 2}" text-anchor="${anchor}" class="mono" font-size="${size}" font-weight="700" fill="${shadow}">${esc(text)}</text>` +
-    `<text x="${x}" y="${y}" text-anchor="${anchor}" class="mono" font-size="${size}" font-weight="700" fill="${color}">${esc(text)}</text>`;
-
-const mix = (a, b, k) => '#' + [0, 2, 4].map((o) => {
-    const v = Math.round(parseInt(a.slice(1 + o, 3 + o), 16) * (1 - k) + parseInt(b.slice(1 + o, 3 + o), 16) * k);
-    return v.toString(16).padStart(2, '0');
-}).join('');
-const quarter = (c) => mix(c, '#000000', 0.75);
-
-const SWORD = [
-    '.............ooo',
-    '............owwo',
-    '...........owwgo',
-    '..........owwgo.',
-    '.........owwgo..',
-    '........owwgo...',
-    '.......owwgo....',
-    '..oo..owwgo.....',
-    '..oyooowgo......',
-    '...oyywgo.......',
-    '....oyyo........',
-    '...ohoyyo.......',
-    '..oho.oyo.......',
-    'oyho...oo.......',
-    'oyyo............',
-    'ooo.............',
-];
-const SWORD_COLORS = { o: '#0B0B12', w: '#A8FFF6', g: '#2FC9C0', y: '#AA00AA', h: '#6B4423' };
-
+// Ambiance synthwave : ciel violet, soleil rayé, grille néon qui défile.
 const huracraft = () => {
     const w = 1200;
-    const h = 240;
-    const cell = 24;
-    const obsidian = ['#14101E', '#1B1428', '#231A33', '#0F0B17', '#2A1F3D'];
-    let bg = '';
-    for (let y = 0; y < h; y += cell) {
-        for (let x = 0; x < w; x += cell) {
-            const n = (Math.imul(x + 7, 73856093) ^ Math.imul(y + 13, 19349663)) >>> 0;
-            bg += `<rect x="${x}" y="${y}" width="${cell}" height="${cell}" fill="${obsidian[(n >>> 7) % obsidian.length]}"/>`;
-        }
+    const h = 280;
+    const horizon = 196;
+    const vx = 930;
+    const pink = '#FF3CAC';
+    const violet = '#8B5CF6';
+    const cyan = '#22D3EE';
+
+    let verticals = '';
+    for (let i = -14; i <= 14; i++) {
+        verticals += `<line x1="${vx + i * 18}" y1="${horizon}" x2="${vx + i * 150}" y2="${h}"/>`;
     }
-    let sword = '';
-    let glint = '';
-    SWORD.forEach((row, r) => {
-        [...row].forEach((ch, c) => {
-            if (ch !== '.') {
-                sword += `<rect x="${60 + c * 8}" y="${56 + r * 8}" width="8" height="8" fill="${SWORD_COLORS[ch]}"/>`;
-                if (ch === 'w' || ch === 'g') {
-                    glint += `<rect class="glint" x="${60 + c * 8}" y="${56 + r * 8}" width="8" height="8" fill="#FF55FF" style="animation-delay:${((15 - r) * 0.08).toFixed(2)}s"/>`;
-                }
-            }
-        });
-    });
-    const bars = [0, 1, 2, 3, 4].map((i) =>
-        `<rect x="${1086 + i * 10}" y="${58 - i * 6}" width="7" height="${10 + i * 6}" fill="#3F3F3F"/>`).join('');
+    let horizontals = '';
+    for (let i = 0; i < 9; i++) {
+        const y = horizon + Math.pow(i / 8, 1.8) * (h - horizon + 20);
+        horizontals += `<line x1="0" y1="${y.toFixed(1)}" x2="${w}" y2="${y.toFixed(1)}"/>`;
+    }
+    let stripes = '';
+    for (let i = 0; i < 6; i++) {
+        stripes += `<rect x="${vx - 110}" y="${150 + i * 9}" width="220" height="${1.5 + i * 0.9}" fill="#14002E"/>`;
+    }
+
     return svg(w, h, `
-${bg}
-<rect width="${w}" height="${h}" fill="#000000" opacity="0.15"/>
-<rect x="24" y="24" width="${w - 48}" height="${h - 48}" fill="#000000" opacity="0.3" stroke="#AA00AA" stroke-width="3"/>
-<rect x="48" y="44" width="152" height="152" fill="#000000" opacity="0.35"/>
-${sword}
-${glint}
-${pixelFlat('HURACRAFT', 236, 52, 6, (i) => mix('#FF55FF', '#55FFFF', i / 8), (i) => quarter(mix('#FF55FF', '#55FFFF', i / 8)))}
-${mcText(236, 138, 'PvP Factions · Vanilla 1.8.9+', '#55FFFF', '#153F3F')}
-${mcText(236, 174, 'Fondé par MikaM06', '#FF55FF', '#3F153F', 18)}
-${bars}
-<text x="1066" y="80" text-anchor="middle" class="mono" font-size="22" font-weight="700" fill="#FF5555">✕</text>
-${mcText(1130, 138, 'Fermé en 2021', '#FF5555', '#3F1515', 18, 'end')}
-<text x="236" y="208" class="mono blink" font-size="14" font-weight="700" fill="#555555">Impossible de se connecter au serveur</text>
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#0B0118"/>
+    <stop offset="0.7" stop-color="#2A0A4A"/>
+    <stop offset="1" stop-color="#14002E"/>
+  </linearGradient>
+  <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="${pink}"/>
+    <stop offset="1" stop-color="${violet}"/>
+  </linearGradient>
+  <linearGradient id="neon" gradientUnits="userSpaceOnUse" x1="56" y1="0" x2="488" y2="0">
+    <stop offset="0" stop-color="${pink}"/>
+    <stop offset="0.5" stop-color="${violet}"/>
+    <stop offset="1" stop-color="${cyan}"/>
+  </linearGradient>
+  <filter id="glow" x="-20%" y="-50%" width="140%" height="200%">
+    <feGaussianBlur stdDeviation="4" result="b"/>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse">
+    <rect width="4" height="1" fill="#000000" opacity="0.35"/>
+  </pattern>
+  <clipPath id="above"><rect width="${w}" height="${horizon}"/></clipPath>
+  <clipPath id="below"><rect y="${horizon}" width="${w}" height="${h - horizon}"/></clipPath>
+</defs>
+<rect width="${w}" height="${h}" fill="url(#sky)"/>
+<g clip-path="url(#above)">
+  <circle cx="${vx}" cy="${horizon}" r="112" fill="url(#sun)" filter="url(#glow)"/>
+  ${stripes}
+</g>
+<rect y="${horizon}" width="${w}" height="${h - horizon}" fill="#0B0118"/>
+<g clip-path="url(#below)" stroke="${cyan}" stroke-width="1.5" opacity="0.8">
+  ${verticals}
+  <g class="scroll">${horizontals}</g>
+</g>
+<line x1="0" y1="${horizon}" x2="${w}" y2="${horizon}" stroke="${pink}" stroke-width="2" filter="url(#glow)"/>
+<g filter="url(#glow)">${pixelFlat('HURACRAFT', 56, 42, 8, 'url(#neon)')}</g>
+<text x="58" y="148" class="mono" font-size="20" font-weight="700" letter-spacing="4" fill="${cyan}">PVP FACTIONS · VANILLA 1.8.9+</text>
+<text x="58" y="178" class="mono" font-size="15" letter-spacing="3" fill="${pink}">FONDÉ PAR MIKAM06</text>
+<rect x="58" y="216" width="190" height="34" fill="#0B0118" stroke="${pink}" stroke-width="2" filter="url(#glow)"/>
+<text x="153" y="238" text-anchor="middle" class="mono blink" font-size="14" font-weight="700" letter-spacing="3" fill="${pink}">FERMÉ EN 2021</text>
+<rect width="${w}" height="${h}" fill="url(#scan)"/>
+<rect x="1.5" y="1.5" width="${w - 3}" height="${h - 3}" fill="none" stroke="${violet}" stroke-width="3"/>
 `, `
-  .blink { animation: blink 2s steps(1) infinite; }
-  @keyframes blink { 50% { opacity: 0.3; } }
-  .glint { opacity: 0; animation: glint 2.4s ease-in-out infinite; }
-  @keyframes glint { 0%, 60%, 100% { opacity: 0; } 30% { opacity: 0.55; } }`);
+  .scroll { animation: scroll 1.6s linear infinite; }
+  @keyframes scroll { from { transform: translateY(0); } to { transform: translateY(12px); } }
+  .blink { animation: blink 1.4s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0.35; } }`);
 };
 
 // ─────────────────────────────────────────────────────────────── stack
