@@ -1,11 +1,14 @@
 // Génère tous les SVG du profil (versions sombre et claire) dans assets/.
 // Usage : node scripts/build-assets.mjs
 
-import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const OUT = join(dirname(fileURLToPath(import.meta.url)), '..', 'assets');
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
+const OUT = join(ROOT, 'assets');
+// Le logo est intégré en base64 : GitHub ne charge pas les images externes dans un SVG.
+const LOGO = readFileSync(join(ROOT, 'media', 'earthquest-logo.png')).toString('base64');
 
 const THEMES = {
     dark: {
@@ -183,34 +186,6 @@ ${lines.map((l, i) => `<text x="28" y="${122 + i * 26}" class="sans" font-size="
 };
 
 const PROJECTS = [
-    ['launcher', {
-        name: 'Launcher',
-        stack: 'RUST · TAURI 2 · SVELTE 5',
-        status: 'EN PRODUCTION',
-        desc: 'Le launcher officiel : installe, met à jour et lance le jeu en un clic, réécrit de zéro en Rust.',
-        link: 'earthquest.fr',
-    }],
-    ['questui', {
-        name: 'QuestUI',
-        stack: 'JAVA · FORGE 1.7.10',
-        status: 'EN PRODUCTION',
-        desc: 'Le mod client d\'EarthQuest : toutes les interfaces du serveur, repensées de zéro.',
-        link: 'earthquest.fr',
-    }],
-    ['queststaff', {
-        name: 'QuestStaff',
-        stack: 'JAVA · BUKKIT',
-        status: 'EN PRODUCTION',
-        desc: 'Les outils de l\'équipe de modération : reports, surveillance et sanctions.',
-        link: 'earthquest.fr',
-    }],
-    ['eqsite', {
-        name: 'EQSite',
-        stack: 'TYPESCRIPT · DOCKER',
-        status: 'EN LIGNE',
-        desc: 'Le site officiel d\'EarthQuest : présentation, actualités et espace joueur.',
-        link: 'earthquest.fr',
-    }],
     ['voxora', {
         name: 'Voxora',
         stack: 'RUST',
@@ -240,6 +215,35 @@ const PROJECTS = [
         link: 'MikaM06/NoPhantom',
     }],
 ];
+
+// ─────────────────────────────────────────────────────────────── earthquest
+
+const FACTS = [
+    ['RÔLE', 'Fondateur'],
+    ['STRUCTURE', 'VoxelMind'],
+    ['JEU', 'Minecraft 1.7.10 moddé'],
+    ['SITE', 'earthquest.fr'],
+];
+
+const earthquest = (t) => {
+    let facts = '';
+    FACTS.forEach(([label, value], i) => {
+        const y = 58 + i * 52;
+        facts += `<rect x="780" y="${y}" width="120" height="32" fill="${t.accent}"/>`;
+        facts += `<text x="840" y="${y + 21}" text-anchor="middle" class="mono" font-size="12" font-weight="700" letter-spacing="1" fill="${t.onAccent}">${esc(label)}</text>`;
+        facts += `<text x="918" y="${y + 22}" class="sans" font-size="18" font-weight="600" fill="${t.text}">${esc(value)}</text>`;
+    });
+    return svg(1200, 300, `
+${block(t, 0, 0, 1188, 288, 10)}
+<image href="data:image/png;base64,${LOGO}" x="48" y="64" width="150" height="150"/>
+<text x="232" y="112" class="sans" font-size="46" font-weight="800" fill="${t.text}">EarthQuest</text>
+<text x="232" y="152" class="sans" font-size="21" font-style="italic" fill="${t.accent}">Écris l'histoire du monde.</text>
+<text x="232" y="198" class="sans" font-size="17" fill="${t.muted}">Un serveur Minecraft moddé, avec son launcher,</text>
+<text x="232" y="224" class="sans" font-size="17" fill="${t.muted}">ses mods et ses outils faits maison.</text>
+<line x1="744" y1="48" x2="744" y2="240" stroke="${t.line}" stroke-width="2" opacity="0.25"/>
+${facts}
+`);
+};
 
 // ─────────────────────────────────────────────────────────────── stack
 
@@ -280,8 +284,9 @@ for (const [mode, t] of Object.entries(THEMES)) {
         write(`section-${id}-${mode}.svg`, section(t, title));
     }
     PROJECTS.forEach(([id, p], i) => {
-        write(`projects/${id}-${mode}.svg`, card(t, p, (i % 4) + 1));
+        write(`projects/${id}-${mode}.svg`, card(t, p, i + 1));
     });
+    write(`earthquest-${mode}.svg`, earthquest(t));
     write(`stack-${mode}.svg`, stack(t));
 }
 

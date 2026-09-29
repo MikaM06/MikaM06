@@ -26,14 +26,10 @@ Je code autour de Minecraft depuis des années : des plugins, des mods, des outi
   <img src="./assets/section-earthquest-dark.svg" width="100%" alt="EarthQuest"/>
 </picture></p>
 
-<p align="center">
-  <a href="https://www.earthquest.fr"><picture><source media="(prefers-color-scheme: light)" srcset="./assets/projects/launcher-light.svg"/><img src="./assets/projects/launcher-dark.svg" width="49%" alt="Launcher · Rust, Tauri 2, Svelte 5"/></picture></a>
-  <a href="https://www.earthquest.fr"><picture><source media="(prefers-color-scheme: light)" srcset="./assets/projects/questui-light.svg"/><img src="./assets/projects/questui-dark.svg" width="49%" alt="QuestUI · mod client Forge 1.7.10"/></picture></a>
-</p>
-<p align="center">
-  <a href="https://www.earthquest.fr"><picture><source media="(prefers-color-scheme: light)" srcset="./assets/projects/queststaff-light.svg"/><img src="./assets/projects/queststaff-dark.svg" width="49%" alt="QuestStaff · outils de modération"/></picture></a>
-  <a href="https://www.earthquest.fr"><picture><source media="(prefers-color-scheme: light)" srcset="./assets/projects/eqsite-light.svg"/><img src="./assets/projects/eqsite-dark.svg" width="49%" alt="EQSite · le site officiel"/></picture></a>
-</p>
+<p align="center"><a href="https://www.earthquest.fr"><picture>
+  <source media="(prefers-color-scheme: light)" srcset="./assets/earthquest-light.svg"/>
+  <img src="./assets/earthquest-dark.svg" width="100%" alt="EarthQuest — Écris l'histoire du monde. Serveur Minecraft 1.7.10 moddé, fondé par MikaM06, porté par VoxelMind. earthquest.fr"/>
+</picture></a></p>
 
 <p align="center"><picture>
   <source media="(prefers-color-scheme: light)" srcset="./assets/section-projects-light.svg"/>
