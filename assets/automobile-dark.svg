@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="590" height="234" viewBox="0 0 590 234">
+<style>
+  .sans { font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  .mono { font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace; }
+  
+  .needle { transform-origin: 470px 150px; animation: rev 3s ease-in-out infinite; }
+  @keyframes rev { 0%, 100% { transform: rotate(15deg); } 55% { transform: rotate(160deg); } 65% { transform: rotate(150deg); } }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+
+
+<rect x="8" y="8" width="580" height="224" fill="#E5484D"/>
+<rect x="1.5" y="1.5" width="577" height="221" fill="#1A0E10" stroke="#F5E6E8" stroke-width="3"/>
+<text x="28" y="62" class="sans" font-size="30" font-weight="800" fill="#F5E6E8">Automobile</text>
+<text x="28" y="100" class="sans" font-size="17" fill="#A88A8F">L'automobile, une vraie passion.</text>
+
+
+<path d="M392 150 A78 78 0 0 1 548 150" fill="none" stroke="#A88A8F" stroke-width="2" opacity="0.5"/>
+<line x1="410.0" y1="150.0" x2="392.0" y2="150.0" stroke="#F5E6E8" stroke-width="3"/><line x1="405.3" y1="129.0" x2="395.8" y2="125.9" stroke="#F5E6E8" stroke-width="3"/><line x1="415.0" y1="110.0" x2="406.9" y2="104.2" stroke="#F5E6E8" stroke-width="3"/><line x1="430.0" y1="95.0" x2="424.2" y2="86.9" stroke="#F5E6E8" stroke-width="3"/><line x1="449.0" y1="85.3" x2="445.9" y2="75.8" stroke="#F5E6E8" stroke-width="3"/><line x1="470.0" y1="90.0" x2="470.0" y2="72.0" stroke="#F5E6E8" stroke-width="3"/><line x1="491.0" y1="85.3" x2="494.1" y2="75.8" stroke="#F5E6E8" stroke-width="3"/><line x1="510.0" y1="95.0" x2="515.8" y2="86.9" stroke="#F5E6E8" stroke-width="3"/><line x1="525.0" y1="110.0" x2="533.1" y2="104.2" stroke="#E5484D" stroke-width="3"/><line x1="534.7" y1="129.0" x2="544.2" y2="125.9" stroke="#E5484D" stroke-width="3"/><line x1="530.0" y1="150.0" x2="548.0" y2="150.0" stroke="#E5484D" stroke-width="3"/>
+<line class="needle" x1="470" y1="150" x2="414" y2="150" stroke="#E5484D" stroke-width="5" stroke-linecap="round"/>
+<circle cx="470" cy="150" r="9" fill="#F5E6E8"/>
+<text x="470" y="190" text-anchor="middle" class="mono" font-size="12" font-weight="700" letter-spacing="2" fill="#A88A8F">KM/H</text>
+
+</svg>

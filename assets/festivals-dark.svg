@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="590" height="234" viewBox="0 0 590 234">
+<style>
+  .sans { font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  .mono { font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace; }
+  
+  .beam { transform-origin: 480px 176px; animation: sweep 2.4s ease-in-out infinite alternate; }
+  @keyframes sweep { from { transform: rotate(-18deg); opacity: 0.9; } to { transform: rotate(18deg); opacity: 0.5; } }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+
+
+<rect x="8" y="8" width="580" height="224" fill="#E5484D"/>
+<rect x="1.5" y="1.5" width="577" height="221" fill="#1A0E10" stroke="#F5E6E8" stroke-width="3"/>
+<text x="28" y="62" class="sans" font-size="30" font-weight="800" fill="#F5E6E8">Festivals</text>
+<text x="28" y="100" class="sans" font-size="17" fill="#A88A8F">Les festivals électro, surtout :</text>
+<rect x="32" y="164" width="146" height="32" fill="#6E1519"/><rect x="28" y="160" width="146" height="32" fill="#E5484D"/><text x="101" y="181" text-anchor="middle" class="mono" font-size="13" font-weight="700" letter-spacing="1.5" fill="#1A0E10">PAROOKAVILLE</text><rect x="190" y="164" width="146" height="32" fill="#6E1519"/><rect x="186" y="160" width="146" height="32" fill="#E5484D"/><text x="259" y="181" text-anchor="middle" class="mono" font-size="13" font-weight="700" letter-spacing="1.5" fill="#1A0E10">TOMORROWLAND</text>
+<line class="beam" x1="480" y1="176" x2="420" y2="36" stroke="#E5484D" stroke-width="3" style="animation-delay:-0.0s"/><line class="beam" x1="480" y1="176" x2="450" y2="36" stroke="#FF8A5B" stroke-width="3" style="animation-delay:-0.3s"/><line class="beam" x1="480" y1="176" x2="480" y2="36" stroke="#E5484D" stroke-width="3" style="animation-delay:-0.6s"/><line class="beam" x1="480" y1="176" x2="510" y2="36" stroke="#FF8A5B" stroke-width="3" style="animation-delay:-0.9s"/><line class="beam" x1="480" y1="176" x2="540" y2="36" stroke="#E5484D" stroke-width="3" style="animation-delay:-1.2s"/><rect x="436" y="176" width="88" height="14" fill="#F5E6E8"/><rect x="424" y="190" width="112" height="6" fill="#E5484D"/>
+
+</svg>

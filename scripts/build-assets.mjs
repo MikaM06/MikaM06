@@ -429,6 +429,69 @@ ${tags}
   @keyframes beat { 0% { transform: scaleY(1); } 30% { transform: scaleY(0.45); } 100% { transform: scaleY(1); } }`);
 };
 
+// Carte de passion : texte et étiquettes à gauche, visuel animé à droite.
+const hobby = (t, { title, lines, tags, visual, style }) => {
+    let x = 28;
+    const chips = tags.map((label) => {
+        const w = label.length * 10 + 26;
+        const out = `<rect x="${x + 4}" y="${164}" width="${w}" height="32" fill="${t.deep}"/>`
+            + `<rect x="${x}" y="160" width="${w}" height="32" fill="${t.accent}"/>`
+            + `<text x="${x + w / 2}" y="181" text-anchor="middle" class="mono" font-size="13" font-weight="700" letter-spacing="1.5" fill="${t.onAccent}">${esc(label)}</text>`;
+        x += w + 12;
+        return out;
+    }).join('');
+    return svg(590, 234, `
+${block(t, 0, 0, 580, 224, 8)}
+<text x="28" y="62" class="sans" font-size="30" font-weight="800" fill="${t.text}">${esc(title)}</text>
+${lines.map((l, i) => `<text x="28" y="${100 + i * 24}" class="sans" font-size="17" fill="${t.muted}">${esc(l)}</text>`).join('\n')}
+${chips}
+${visual}
+`, style);
+};
+
+// Faisceaux laser qui balaient depuis la scène.
+const festivals = (t) => {
+    const beams = [0, 1, 2, 3, 4].map((i) =>
+        `<line class="beam" x1="480" y1="176" x2="${420 + i * 30}" y2="36" stroke="${i % 2 ? t.accent2 : t.accent}" stroke-width="3" style="animation-delay:-${(i * 0.3).toFixed(1)}s"/>`).join('');
+    return hobby(t, {
+        title: 'Festivals',
+        lines: ['Les festivals électro, surtout :'],
+        tags: ['PAROOKAVILLE', 'TOMORROWLAND'],
+        visual: `${beams}<rect x="436" y="176" width="88" height="14" fill="${t.line}"/><rect x="424" y="190" width="112" height="6" fill="${t.accent}"/>`,
+        style: `
+  .beam { transform-origin: 480px 176px; animation: sweep 2.4s ease-in-out infinite alternate; }
+  @keyframes sweep { from { transform: rotate(-18deg); opacity: 0.9; } to { transform: rotate(18deg); opacity: 0.5; } }`,
+    });
+};
+
+// Compteur de vitesse dont l'aiguille monte et redescend.
+const automobile = (t) => {
+    const cx = 470;
+    const cy = 150;
+    const r = 78;
+    let ticks = '';
+    for (let i = 0; i <= 10; i++) {
+        const a = Math.PI * (1 + i / 10);
+        const [c, sn] = [Math.cos(a), Math.sin(a)];
+        const inner = i % 5 === 0 ? r - 18 : r - 10;
+        ticks += `<line x1="${(cx + c * inner).toFixed(1)}" y1="${(cy + sn * inner).toFixed(1)}" x2="${(cx + c * r).toFixed(1)}" y2="${(cy + sn * r).toFixed(1)}" stroke="${i >= 8 ? t.accent : t.line}" stroke-width="3"/>`;
+    }
+    return hobby(t, {
+        title: 'Automobile',
+        lines: ['L\'automobile, une vraie passion.'],
+        tags: [],
+        visual: `
+<path d="M${cx - r} ${cy} A${r} ${r} 0 0 1 ${cx + r} ${cy}" fill="none" stroke="${t.muted}" stroke-width="2" opacity="0.5"/>
+${ticks}
+<line class="needle" x1="${cx}" y1="${cy}" x2="${cx - r + 22}" y2="${cy}" stroke="${t.accent}" stroke-width="5" stroke-linecap="round"/>
+<circle cx="${cx}" cy="${cy}" r="9" fill="${t.line}"/>
+<text x="${cx}" y="${cy + 40}" text-anchor="middle" class="mono" font-size="12" font-weight="700" letter-spacing="2" fill="${t.muted}">KM/H</text>`,
+        style: `
+  .needle { transform-origin: ${cx}px ${cy}px; animation: rev 3s ease-in-out infinite; }
+  @keyframes rev { 0%, 100% { transform: rotate(15deg); } 55% { transform: rotate(160deg); } 65% { transform: rotate(150deg); } }`,
+    });
+};
+
 // ─────────────────────────────────────────────────────────────── stack
 
 const STACK = [
@@ -476,6 +539,8 @@ for (const [mode, t] of Object.entries(THEMES)) {
     write(`herocrafts-${mode}.svg`, herocrafts(t));
     write(`stack-${mode}.svg`, stack(t));
     write(`music-${mode}.svg`, music(t));
+    write(`festivals-${mode}.svg`, festivals(t));
+    write(`automobile-${mode}.svg`, automobile(t));
 }
 
 // Nouveau numéro de version dans le README, pour que GitHub ne serve pas d'anciennes images en cache.
