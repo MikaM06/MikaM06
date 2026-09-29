@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="280" viewBox="0 0 1200 280">
+<style>
+  .sans { font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  .mono { font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace; }
+  
+  .pop { transform-origin: 985px 180px; animation: pop 2.6s ease-in-out infinite; }
+  @keyframes pop { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+
+<defs>
+  <pattern id="dots" width="14" height="14" patternUnits="userSpaceOnUse">
+    <rect width="14" height="14" fill="#FFD23F"/>
+    <circle cx="7" cy="7" r="3" fill="#F2B705"/>
+  </pattern>
+  <pattern id="dotsRed" width="14" height="14" patternUnits="userSpaceOnUse">
+    <rect width="14" height="14" fill="#E5484D"/>
+    <circle cx="7" cy="7" r="3" fill="#C9363B"/>
+  </pattern>
+</defs>
+<rect width="1200" height="280" fill="#FFFFFF"/>
+<polygon points="8,8 800,8 740,272 8,272" fill="url(#dots)" stroke="#111111" stroke-width="6" stroke-linejoin="round"/>
+<polygon points="818,8 1192,8 1192,272 758,272" fill="url(#dotsRed)" stroke="#111111" stroke-width="6" stroke-linejoin="round"/>
+<g transform="translate(52 138) skewX(-8)">
+  <text x="8" y="8" font-family="Impact, 'Arial Black', 'Segoe UI', sans-serif" font-size="92" font-weight="900" fill="#111111">HEROCRAFTS</text>
+  <text x="0" y="0" font-family="Impact, 'Arial Black', 'Segoe UI', sans-serif" font-size="92" font-weight="900" fill="#FFFFFF" stroke="#111111" stroke-width="5" paint-order="stroke">HEROCRAFTS</text>
+</g>
+<rect x="52" y="178" width="470" height="52" fill="#FFFFFF" stroke="#111111" stroke-width="4"/>
+<text x="287" y="212" text-anchor="middle" font-family="Impact, 'Arial Black', 'Segoe UI', sans-serif" font-size="22" font-weight="900" letter-spacing="1" fill="#111111">PVP FACTIONS &amp; MINI-JEUX · 1.12.2</text>
+<rect x="858" y="30" width="230" height="44" fill="#FFFFFF" stroke="#111111" stroke-width="4" transform="rotate(-3 973 52)"/>
+<text x="973" y="61" text-anchor="middle" font-family="Impact, 'Arial Black', 'Segoe UI', sans-serif" font-size="22" font-weight="900" letter-spacing="1" fill="#111111" transform="rotate(-3 973 52)">RÔLE : ADMIN</text>
+<g class="pop">
+  <polygon points="1103.0,180.0 1064.9,194.2 1078.6,215.1 1049.1,219.9 1054.2,247.6 1020.6,237.6 1011.3,269.7 985.0,244.0 961.9,259.0 949.4,237.6 915.8,247.6 920.9,219.9 878.7,219.9 905.1,194.2 881.2,180.0 905.1,165.8 885.1,142.5 920.9,140.1 911.4,108.0 949.4,122.4 961.9,101.0 985.0,116.0 1009.7,95.7 1020.6,122.4 1058.6,108.0 1049.1,140.1 1078.6,144.9 1064.9,165.8" fill="#FFD23F" stroke="#111111" stroke-width="5" stroke-linejoin="round"/>
+  <g transform="rotate(-6 985 180)" font-family="Impact, 'Arial Black', 'Segoe UI', sans-serif" font-weight="900" text-anchor="middle" fill="#E5484D" stroke="#111111" stroke-width="3" paint-order="stroke">
+    <text x="985" y="174" font-size="38">FERMÉ</text>
+    <text x="985" y="214" font-size="34">EN 2022</text>
+  </g>
+</g>
+
+</svg>

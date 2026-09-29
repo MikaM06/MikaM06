@@ -352,6 +352,58 @@ const huracraft = () => {
   @keyframes blink { 50% { opacity: 0.35; } }`);
 };
 
+// ─────────────────────────────────────────────────────────────── herocrafts (bande dessinée)
+
+const COMIC = "Impact, 'Arial Black', 'Segoe UI', sans-serif";
+
+// Bulle d'explosion : une étoile irrégulière à `n` branches.
+const burst = (cx, cy, r1, r2, n) => {
+    const pts = [];
+    for (let i = 0; i < n * 2; i++) {
+        const a = (Math.PI * i) / n;
+        const r = i % 2 === 0 ? r1 * (1 - (i % 3) * 0.06) : r2;
+        pts.push(`${(cx + Math.cos(a) * r).toFixed(1)},${(cy + Math.sin(a) * r * 0.78).toFixed(1)}`);
+    }
+    return pts.join(' ');
+};
+
+const herocrafts = () => {
+    const w = 1200;
+    const h = 280;
+    return svg(w, h, `
+<defs>
+  <pattern id="dots" width="14" height="14" patternUnits="userSpaceOnUse">
+    <rect width="14" height="14" fill="#FFD23F"/>
+    <circle cx="7" cy="7" r="3" fill="#F2B705"/>
+  </pattern>
+  <pattern id="dotsRed" width="14" height="14" patternUnits="userSpaceOnUse">
+    <rect width="14" height="14" fill="#E5484D"/>
+    <circle cx="7" cy="7" r="3" fill="#C9363B"/>
+  </pattern>
+</defs>
+<rect width="${w}" height="${h}" fill="#FFFFFF"/>
+<polygon points="8,8 800,8 740,272 8,272" fill="url(#dots)" stroke="#111111" stroke-width="6" stroke-linejoin="round"/>
+<polygon points="818,8 1192,8 1192,272 758,272" fill="url(#dotsRed)" stroke="#111111" stroke-width="6" stroke-linejoin="round"/>
+<g transform="translate(52 138) skewX(-8)">
+  <text x="8" y="8" font-family="${COMIC}" font-size="92" font-weight="900" fill="#111111">HEROCRAFTS</text>
+  <text x="0" y="0" font-family="${COMIC}" font-size="92" font-weight="900" fill="#FFFFFF" stroke="#111111" stroke-width="5" paint-order="stroke">HEROCRAFTS</text>
+</g>
+<rect x="52" y="178" width="470" height="52" fill="#FFFFFF" stroke="#111111" stroke-width="4"/>
+<text x="287" y="212" text-anchor="middle" font-family="${COMIC}" font-size="22" font-weight="900" letter-spacing="1" fill="#111111">PVP FACTIONS &amp; MINI-JEUX · 1.12.2</text>
+<rect x="858" y="30" width="230" height="44" fill="#FFFFFF" stroke="#111111" stroke-width="4" transform="rotate(-3 973 52)"/>
+<text x="973" y="61" text-anchor="middle" font-family="${COMIC}" font-size="22" font-weight="900" letter-spacing="1" fill="#111111" transform="rotate(-3 973 52)">RÔLE : ADMIN</text>
+<g class="pop">
+  <polygon points="${burst(985, 180, 118, 82, 14)}" fill="#FFD23F" stroke="#111111" stroke-width="5" stroke-linejoin="round"/>
+  <g transform="rotate(-6 985 180)" font-family="${COMIC}" font-weight="900" text-anchor="middle" fill="#E5484D" stroke="#111111" stroke-width="3" paint-order="stroke">
+    <text x="985" y="174" font-size="38">FERMÉ</text>
+    <text x="985" y="214" font-size="34">EN 2022</text>
+  </g>
+</g>
+`, `
+  .pop { transform-origin: 985px 180px; animation: pop 2.6s ease-in-out infinite; }
+  @keyframes pop { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }`);
+};
+
 // ─────────────────────────────────────────────────────────────── stack
 
 const STACK = [
@@ -396,6 +448,7 @@ for (const [mode, t] of Object.entries(THEMES)) {
     write(`earthquest-${mode}.svg`, earthquest(t));
     write(`undercraft-${mode}.svg`, undercraft(t));
     write(`huracraft-${mode}.svg`, huracraft());
+    write(`herocrafts-${mode}.svg`, herocrafts());
     write(`stack-${mode}.svg`, stack(t));
 }
 
