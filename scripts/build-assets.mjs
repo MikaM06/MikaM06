@@ -20,6 +20,8 @@ const THEMES = {
         accent2: '#FF8A5B',
         deep: '#6E1519',
         onAccent: '#1A0E10',
+        castle: '#F5E6E8',
+        castleStroke: 'none',
     },
     light: {
         card: '#FFF6F5',
@@ -30,6 +32,8 @@ const THEMES = {
         accent2: '#F2663B',
         deep: '#8C1A20',
         onAccent: '#FFF6F5',
+        castle: '#FFFFFF',
+        castleStroke: '#2A1215',
     },
 };
 
@@ -455,62 +459,138 @@ ${visual}
 `, style);
 };
 
-// Deux lyres suspendues à un pont en treillis, dont les faisceaux balaient la foule.
-const lyre = (t, px, cls) => {
-    const py = 72;
-    return `
-<g class="${cls}">
-  <polygon points="${px - 5},${py + 8} ${px + 5},${py + 8} ${px + 46},${py + 150} ${px - 46},${py + 150}" fill="url(#beam)"/>
-  <rect x="${px - 11}" y="${py - 7}" width="22" height="22" rx="4" fill="${t.line}"/>
-  <circle cx="${px}" cy="${py + 12}" r="6" fill="${t.accent2}"/>
-  <circle cx="${px}" cy="${py + 12}" r="3" fill="#FFFFFF"/>
-</g>
-<path d="M${px - 16} ${py - 22} V${py + 2} M${px + 16} ${py - 22} V${py + 2}" stroke="${t.muted}" stroke-width="4" stroke-linecap="round"/>
-<rect x="${px - 20}" y="${py - 30}" width="40" height="10" fill="${t.muted}"/>
-<rect x="${px - 5}" y="${py - 40}" width="10" height="10" fill="${t.line}"/>`;
-};
+// Mainstage de festival en miniature : architecture baroque ivoire et or, grande tour
+// centrale, ailes symétriques de plus en plus basses, livres géants, faisceaux, feux
+// d'artifice, fontaines et foule au premier plan, de nuit.
+const mainstage = (t) => {
+    const cx = 452;
+    const base = 172;
+    const ivory = '#F1E6D0';
+    const shade = '#B8A88C';
+    const gold = '#D9A441';
+    const glowY = '#FFD27A';
 
-const festivals = (t) => {
-    let truss = `<rect x="340" y="26" width="226" height="6" fill="${t.line}"/><rect x="340" y="38" width="226" height="6" fill="${t.line}"/>`;
-    for (let x = 340; x < 562; x += 16) {
-        truss += `<path d="M${x} 32 L${x + 8} 38 L${x + 16} 32" fill="none" stroke="${t.line}" stroke-width="2"/>`;
+    // Aile : bloc ivoire, colonnes, arches éclairées, corniche dorée et statues.
+    const wing = (x0, x1, top) => {
+        let out = `<rect x="${x0}" y="${top}" width="${x1 - x0}" height="${base - top}" fill="${ivory}"/>`;
+        for (let x = x0 + 3; x < x1 - 1; x += 7) {
+            out += `<rect x="${x}" y="${top + 6}" width="1.6" height="${base - top - 6}" fill="${shade}"/>`;
+        }
+        const arches = Math.max(1, Math.floor((x1 - x0) / 14));
+        const aw = (x1 - x0) / arches;
+        for (let i = 0; i < arches; i++) {
+            const ax = x0 + i * aw + aw / 2;
+            out += `<path d="M${ax - 3.5} ${base - 4} V${top + 16} A3.5 3.5 0 0 1 ${ax + 3.5} ${top + 16} V${base - 4} Z" fill="${glowY}" opacity="0.75"/>`;
+        }
+        out += `<rect x="${x0 - 1}" y="${top - 2}" width="${x1 - x0 + 2}" height="3" fill="${gold}"/>`;
+        for (const sx of [x0 + 2, x1 - 2]) {
+            out += `<circle cx="${sx}" cy="${top - 8}" r="1.6" fill="${ivory}"/><rect x="${sx - 1}" y="${top - 6.5}" width="2" height="4.5" fill="${ivory}"/>`;
+        }
+        return out;
+    };
+
+    // Livres géants empilés au pied de la tour.
+    const books = (x, flip) => [[0, '#8C1A20'], [7, '#D9A441'], [14, '#6E1519']].map(([dy, c], i) =>
+        `<g transform="rotate(${flip ? 6 - i * 4 : -6 + i * 4} ${x + 10} ${base - dy - 3})"><rect x="${x}" y="${base - dy - 6}" width="20" height="6" fill="${c}"/><rect x="${x}" y="${base - dy - 6}" width="20" height="1.5" fill="${ivory}"/></g>`).join('');
+
+    const beams = [-34, -12, 12, 34].map((a, i) =>
+        `<polygon class="beam" points="${cx - 3},120 ${cx + 3},120 ${cx + a * 2 + 14},10 ${cx + a * 2 - 14},10" fill="url(#gbeam)" style="animation-delay:-${(i * 0.6).toFixed(1)}s"/>`).join('');
+
+    const firework = (x, y, delay) => {
+        let rays = '';
+        for (let i = 0; i < 10; i++) {
+            const a = (Math.PI * 2 * i) / 10;
+            rays += `<line x1="${x}" y1="${y}" x2="${(x + Math.cos(a) * 11).toFixed(1)}" y2="${(y + Math.sin(a) * 11).toFixed(1)}"/>`;
+        }
+        return `<g class="fw" stroke="${glowY}" stroke-width="1.2" style="transform-origin:${x}px ${y}px;animation-delay:-${delay}s">${rays}</g>`;
+    };
+
+    let twinkles = '';
+    let n = 5;
+    for (let i = 0; i < 34; i++) {
+        n = (n * 16807) % 2147483647;
+        const x = 346 + (n % 212);
+        const y = 40 + ((n >> 8) % 128);
+        twinkles += `<circle class="tw" cx="${x}" cy="${y}" r="0.9" fill="#FFF4D6" style="animation-delay:-${((n >> 4) % 20) / 10}s"/>`;
     }
+
     let crowd = '';
-    for (let i = 0; i < 12; i++) {
-        const x = 350 + i * 18 + (i % 2) * 4;
-        const lift = i % 3 === 0 ? 6 : 0;
-        crowd += `<circle cx="${x}" cy="${196 - lift}" r="6" fill="${t.deep}"/><rect x="${x - 8}" y="${203 - lift}" width="16" height="14" rx="4" fill="${t.deep}"/>`;
-        if (i % 4 === 1) {
-            crowd += `<rect class="hand" x="${x + 5}" y="${176}" width="4" height="18" rx="2" fill="${t.deep}" style="animation-delay:-${(i * 0.1).toFixed(1)}s"/>`;
+    for (const [y, step, r] of [[184, 6, 2.2], [192, 5.4, 2.6], [201, 5, 3]]) {
+        for (let x = 340 + (y % 3); x < 564; x += step) {
+            crowd += `<circle cx="${x.toFixed(1)}" cy="${y}" r="${r}"/>`;
         }
     }
-    return hobby(t, {
-        title: 'Festivals',
-        lines: ['Les festivals électro, surtout :'],
-        tags: ['PAROOKAVILLE', 'TOMORROWLAND', 'DEFQON.1'],
-        visual: `
+    const hands = [360, 398, 441, 489, 522, 551].map((x, i) =>
+        `<rect class="hand" x="${x}" y="178" width="1.8" height="9" rx="0.9" style="animation-delay:-${(i * 0.13).toFixed(2)}s"/>`).join('');
+
+    const jets = [388, 404, 500, 516].map((x, i) =>
+        `<path class="jet" d="M${x} ${base} Q${x - 2} ${base - 10} ${x} ${base - 18} Q${x + 2} ${base - 10} ${x} ${base}" fill="#FFF4D6" opacity="0.6" style="animation-delay:-${(i * 0.3).toFixed(1)}s"/>`).join('');
+
+    return `
 <defs>
-  <linearGradient id="beam" gradientUnits="userSpaceOnUse" x1="0" y1="80" x2="0" y2="222">
-    <stop offset="0" stop-color="${t.accent2}" stop-opacity="0.85"/>
-    <stop offset="1" stop-color="${t.accent}" stop-opacity="0"/>
+  <linearGradient id="night" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#07050B"/>
+    <stop offset="0.75" stop-color="#241320"/>
+    <stop offset="1" stop-color="#140A10"/>
   </linearGradient>
-  <clipPath id="stage"><rect x="330" y="6" width="244" height="212"/></clipPath>
+  <radialGradient id="halo" cx="${cx}" cy="96" r="120" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="${glowY}" stop-opacity="0.45"/>
+    <stop offset="1" stop-color="${glowY}" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="gbeam" gradientUnits="userSpaceOnUse" x1="0" y1="120" x2="0" y2="10">
+    <stop offset="0" stop-color="#FFF4D6" stop-opacity="0.7"/>
+    <stop offset="1" stop-color="#FFF4D6" stop-opacity="0"/>
+  </linearGradient>
+  <clipPath id="frame"><rect x="338" y="16" width="226" height="194"/></clipPath>
 </defs>
-<g clip-path="url(#stage)">
-  ${lyre(t, 398, 'head left')}
-  ${lyre(t, 508, 'head right')}
-  ${crowd}
+<g clip-path="url(#frame)">
+  <rect x="338" y="16" width="226" height="194" fill="url(#night)"/>
+  ${firework(362, 42, 0)}${firework(544, 36, 1.2)}${firework(526, 60, 0.6)}
+  <rect x="338" y="16" width="226" height="194" fill="url(#halo)"/>
+  ${beams}
+  ${wing(344, 372, 142)}${wing(532, 560, 142)}
+  ${wing(372, 404, 122)}${wing(500, 532, 122)}
+  ${wing(404, 432, 100)}${wing(472, 500, 100)}
+  <rect x="430" y="110" width="44" height="${base - 110}" fill="${ivory}"/>
+  <rect x="436" y="74" width="32" height="36" fill="${ivory}"/>
+  <rect x="442" y="48" width="20" height="26" fill="${ivory}"/>
+  <rect x="428" y="108" width="48" height="3" fill="${gold}"/>
+  <rect x="434" y="72" width="36" height="3" fill="${gold}"/>
+  <rect x="440" y="46" width="24" height="3" fill="${gold}"/>
+  <path d="M442 47 Q${cx} 26 462 47 Z" fill="${ivory}"/>
+  <line x1="${cx}" y1="30" x2="${cx}" y2="16" stroke="${gold}" stroke-width="1.6"/>
+  <circle cx="${cx}" cy="16" r="2.2" fill="${gold}"/>
+  <path d="M${cx - 8} ${base} V128 A8 8 0 0 1 ${cx + 8} 128 V${base} Z" fill="${glowY}"/>
+  <path d="M${cx - 5} 104 V86 A5 5 0 0 1 ${cx + 5} 86 V104 Z" fill="${glowY}" opacity="0.85"/>
+  <circle cx="${cx}" cy="60" r="4" fill="${glowY}" opacity="0.85"/>
+  ${[438, 446, 458, 466].map((x) => `<rect x="${x - 0.8}" y="114" width="1.6" height="${base - 114}" fill="${shade}"/>`).join('')}
+  ${books(408, false)}${books(476, true)}
+  ${twinkles}
+  ${jets}
+  <rect x="338" y="${base}" width="226" height="${210 - base}" fill="#0E0810"/>
+  <g fill="#3A2028">${crowd}</g>
+  <g fill="#3A2028">${hands}</g>
 </g>
-${truss}`,
-        style: `
-  .head { animation: sweep 2.4s ease-in-out infinite alternate; }
-  .left { transform-origin: 398px 84px; }
-  .right { transform-origin: 508px 84px; animation-direction: alternate-reverse; }
-  @keyframes sweep { from { transform: rotate(-28deg); } to { transform: rotate(28deg); } }
-  .hand { transform-box: fill-box; transform-origin: bottom; animation: jump 0.4s ease-in-out infinite alternate; }
-  @keyframes jump { from { transform: translateY(0); } to { transform: translateY(-4px); } }`,
-    });
+<rect x="338" y="16" width="226" height="194" fill="none" stroke="${t.line}" stroke-width="2"/>`;
 };
+
+const festivals = (t) => hobby(t, {
+    title: 'Festivals',
+    lines: ['Les festivals électro, surtout :'],
+    tags: ['PAROOKAVILLE', 'TOMORROWLAND', 'DEFQON.1'],
+    visual: mainstage(t),
+    style: `
+  .beam { transform-origin: 452px 120px; animation: sweep 3.2s ease-in-out infinite alternate; }
+  @keyframes sweep { from { transform: rotate(-14deg); } to { transform: rotate(14deg); } }
+  .fw { opacity: 0; animation: burst 2.4s ease-out infinite; }
+  @keyframes burst { 0% { transform: scale(0.1); opacity: 0; } 10% { opacity: 1; } 60% { transform: scale(1); opacity: 0; } 100% { opacity: 0; } }
+  .tw { animation: twinkle 2s ease-in-out infinite alternate; }
+  @keyframes twinkle { from { opacity: 1; } to { opacity: 0.15; } }
+  .jet { transform-box: fill-box; transform-origin: bottom; animation: jet 1.2s ease-in-out infinite alternate; }
+  @keyframes jet { from { transform: scaleY(0.4); } to { transform: scaleY(1.1); } }
+  .hand { transform-box: fill-box; transform-origin: bottom; animation: jump 0.4s ease-in-out infinite alternate; }
+  @keyframes jump { from { transform: translateY(0); } to { transform: translateY(-3px); } }`,
+});
 
 // Compteur de vitesse dont l'aiguille monte et redescend.
 const automobile = (t) => {
