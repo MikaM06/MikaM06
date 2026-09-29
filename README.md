@@ -43,7 +43,10 @@ Je code autour de Minecraft depuis des années : des plugins, des mods, des outi
 
 <p align="center"><img src="./assets/huracraft-dark.svg" width="100%" alt="HuraCraft — PvP Factions Vanilla 1.8.9+, fondé par MikaM06, fermé en 2021"/></p>
 
-<p align="center"><img src="./assets/herocrafts-dark.svg" width="100%" alt="Herocrafts — PvP Factions et mini-jeux en 1.12.2, MikaM06 y était admin, fermé en 2022"/></p>
+<p align="center"><picture>
+  <source media="(prefers-color-scheme: light)" srcset="./assets/herocrafts-light.svg"/>
+  <img src="./assets/herocrafts-dark.svg" width="100%" alt="Herocrafts — PvP Factions et mini-jeux en 1.12.2, MikaM06 y était admin, fermé en 2022"/>
+</picture></p>
 
 <p align="center"><picture>
   <source media="(prefers-color-scheme: light)" srcset="./assets/section-projects-light.svg"/>
