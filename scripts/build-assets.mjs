@@ -296,7 +296,7 @@ const herocrafts = (t) => server(t, {
     name: 'Herocrafts',
     tagline: 'Admin, avant tout le reste.',
     lines: ['Un serveur PvP Factions et mini-jeux en 1.12.2,', 'sur lequel j\'étais administrateur.'],
-    facts: [['RÔLE', 'Admin'], ['MODES', 'Factions & mini-jeux'], ['JEU', 'Minecraft 1.12.2'], ['STATUT', 'Fermé en 2022']],
+    facts: [['RÔLE', 'Admin'], ['JEU', 'Minecraft 1.12.2'], ['DÉPART', 'Mars 2022'], ['STATUT', 'Fermé à l\'été 2022']],
 });
 
 // ─────────────────────────────────────────────────────────────── huracraft (rétro)
