@@ -38,7 +38,7 @@ Je code autour de Minecraft depuis des années : des plugins, des mods, des outi
 
 <p align="center"><picture>
   <source media="(prefers-color-scheme: light)" srcset="./assets/undercraft-light.svg"/>
-  <img src="./assets/undercraft-dark.svg" width="100%" alt="UnderCraft — mon serveur avant EarthQuest, fondé par MikaM06, fermé en 2024"/>
+  <img src="./assets/undercraft-dark.svg" width="100%" alt="Undercraft — mon serveur avant EarthQuest, fondé par MikaM06, fermé en 2024"/>
 </picture></p>
 
 <p align="center"><img src="./assets/huracraft-dark.svg" width="100%" alt="HuraCraft — PvP Factions Vanilla 1.8.9+, fondé par MikaM06, fermé en 2021"/></p>

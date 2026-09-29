@@ -254,7 +254,7 @@ const earthquest = (t) => server(t, {
 
 const undercraft = (t) => server(t, {
     icon: `<g opacity="0.6">${cube(t, 123, 92, 44)}${cube(t, 85, 158, 44)}${cube(t, 161, 158, 44)}</g>`,
-    name: 'UnderCraft',
+    name: 'Undercraft',
     tagline: 'Là où tout a commencé.',
     lines: ['Mon serveur avant EarthQuest, où j\'ai écrit', 'mes premiers plugins et outils de modération.'],
     facts: [['RÔLE', 'Fondateur'], ['STATUT', 'Fermé en 2024'], ['SUITE', 'EarthQuest']],
