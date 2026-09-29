@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="270" viewBox="0 0 1200 270">
+<style>
+  .sans { font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  .mono { font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace; }
+  
+  .bar { transform-box: fill-box; transform-origin: bottom; animation: beat 0.4s ease-out infinite; }
+  @keyframes beat { 0% { transform: scaleY(1); } 30% { transform: scaleY(0.45); } 100% { transform: scaleY(1); } }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+
+<defs>
+  <linearGradient id="eqgrad" x1="0" y1="1" x2="0" y2="0">
+    <stop offset="0" stop-color="#E5484D"/>
+    <stop offset="1" stop-color="#FF8A5B"/>
+  </linearGradient>
+</defs>
+
+<rect x="10" y="10" width="1188" height="258" fill="#E5484D"/>
+<rect x="1.5" y="1.5" width="1185" height="255" fill="#1A0E10" stroke="#F5E6E8" stroke-width="3"/>
+<rect class="bar" x="52" y="164" width="14" height="60" fill="url(#eqgrad)" style="animation-delay:-0.00s"/><rect class="bar" x="74" y="140" width="14" height="84" fill="url(#eqgrad)" style="animation-delay:-0.16s"/><rect class="bar" x="96" y="96" width="14" height="128" fill="url(#eqgrad)" style="animation-delay:-0.32s"/><rect class="bar" x="118" y="173" width="14" height="51" fill="url(#eqgrad)" style="animation-delay:-0.08s"/><rect class="bar" x="140" y="109" width="14" height="115" fill="url(#eqgrad)" style="animation-delay:-0.24s"/><rect class="bar" x="162" y="85" width="14" height="139" fill="url(#eqgrad)" style="animation-delay:-0.00s"/><rect class="bar" x="184" y="162" width="14" height="62" fill="url(#eqgrad)" style="animation-delay:-0.16s"/><rect class="bar" x="206" y="118" width="14" height="106" fill="url(#eqgrad)" style="animation-delay:-0.32s"/><rect class="bar" x="228" y="54" width="14" height="170" fill="url(#eqgrad)" style="animation-delay:-0.08s"/><rect class="bar" x="250" y="151" width="14" height="73" fill="url(#eqgrad)" style="animation-delay:-0.24s"/><rect class="bar" x="272" y="107" width="14" height="117" fill="url(#eqgrad)" style="animation-delay:-0.00s"/><rect class="bar" x="294" y="184" width="14" height="40" fill="url(#eqgrad)" style="animation-delay:-0.16s"/><rect class="bar" x="316" y="120" width="14" height="104" fill="url(#eqgrad)" style="animation-delay:-0.32s"/><rect class="bar" x="338" y="96" width="14" height="128" fill="url(#eqgrad)" style="animation-delay:-0.08s"/><rect class="bar" x="360" y="173" width="14" height="51" fill="url(#eqgrad)" style="animation-delay:-0.24s"/><rect class="bar" x="382" y="129" width="14" height="95" fill="url(#eqgrad)" style="animation-delay:-0.00s"/><rect class="bar" x="404" y="65" width="14" height="159" fill="url(#eqgrad)" style="animation-delay:-0.16s"/><rect class="bar" x="426" y="162" width="14" height="62" fill="url(#eqgrad)" style="animation-delay:-0.32s"/><rect class="bar" x="448" y="118" width="14" height="106" fill="url(#eqgrad)" style="animation-delay:-0.08s"/><rect class="bar" x="470" y="74" width="14" height="150" fill="url(#eqgrad)" style="animation-delay:-0.24s"/><rect class="bar" x="492" y="131" width="14" height="93" fill="url(#eqgrad)" style="animation-delay:-0.00s"/><rect class="bar" x="514" y="107" width="14" height="117" fill="url(#eqgrad)" style="animation-delay:-0.16s"/><rect class="bar" x="536" y="184" width="14" height="40" fill="url(#eqgrad)" style="animation-delay:-0.32s"/><rect class="bar" x="558" y="140" width="14" height="84" fill="url(#eqgrad)" style="animation-delay:-0.08s"/>
+<line x1="44" y1="228" x2="584" y2="228" stroke="#F5E6E8" stroke-width="2" opacity="0.3"/>
+<line x1="636" y1="44" x2="636" y2="216" stroke="#F5E6E8" stroke-width="2" opacity="0.25"/>
+<text x="690" y="96" class="sans" font-size="44" font-weight="800" fill="#F5E6E8">Musique</text>
+<text x="690" y="138" class="sans" font-size="20" fill="#A88A8F">L'électro et le hardstyle, c'est ma passion.</text>
+<text x="1140" y="96" text-anchor="end" class="mono" font-size="14" font-weight="700" letter-spacing="2" fill="#E5484D">150 BPM</text>
+<rect x="694" y="186" width="107" height="36" fill="#6E1519"/><rect x="690" y="182" width="107" height="36" fill="#E5484D"/><text x="743.5" y="206" text-anchor="middle" class="mono" font-size="15" font-weight="700" letter-spacing="2" fill="#1A0E10">ELECTRO</text><rect x="822" y="186" width="129" height="36" fill="#6E1519"/><rect x="818" y="182" width="129" height="36" fill="#E5484D"/><text x="882.5" y="206" text-anchor="middle" class="mono" font-size="15" font-weight="700" letter-spacing="2" fill="#1A0E10">HARDSTYLE</text>
+
+</svg>

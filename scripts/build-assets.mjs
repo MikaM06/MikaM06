@@ -154,6 +154,7 @@ const SECTIONS = [
     ['before', 'Avant EarthQuest'],
     ['projects', 'Projets perso'],
     ['stack', 'Stack'],
+    ['music', 'En dehors du code'],
     ['activity', 'Contributions'],
 ];
 
@@ -391,6 +392,43 @@ const huracraft = () => {
   @keyframes blink { 50% { opacity: 0.35; } }`);
 };
 
+// ─────────────────────────────────────────────────────────────── musique
+
+// Égaliseur calé sur le tempo du hardstyle : 150 BPM, soit un temps toutes les 0,4 s.
+const music = (t) => {
+    const bars = 24;
+    let eq = '';
+    for (let i = 0; i < bars; i++) {
+        const hgt = 40 + ((i * 37) % 11) * 11 + (i % 4 === 0 ? 20 : 0);
+        const delay = (((i * 7) % 5) * 0.08).toFixed(2);
+        eq += `<rect class="bar" x="${52 + i * 22}" y="${224 - hgt}" width="14" height="${hgt}" fill="url(#eqgrad)" style="animation-delay:-${delay}s"/>`;
+    }
+    const tags = [['ELECTRO', 690], ['HARDSTYLE', 818]].map(([label, x]) => {
+        const w = label.length * 11 + 30;
+        return `<rect x="${x + 4}" y="186" width="${w}" height="36" fill="${t.deep}"/>`
+            + `<rect x="${x}" y="182" width="${w}" height="36" fill="${t.accent}"/>`
+            + `<text x="${x + w / 2}" y="206" text-anchor="middle" class="mono" font-size="15" font-weight="700" letter-spacing="2" fill="${t.onAccent}">${label}</text>`;
+    }).join('');
+    return svg(1200, 270, `
+<defs>
+  <linearGradient id="eqgrad" x1="0" y1="1" x2="0" y2="0">
+    <stop offset="0" stop-color="${t.accent}"/>
+    <stop offset="1" stop-color="${t.accent2}"/>
+  </linearGradient>
+</defs>
+${block(t, 0, 0, 1188, 258, 10)}
+${eq}
+<line x1="44" y1="228" x2="584" y2="228" stroke="${t.line}" stroke-width="2" opacity="0.3"/>
+<line x1="636" y1="44" x2="636" y2="216" stroke="${t.line}" stroke-width="2" opacity="0.25"/>
+<text x="690" y="96" class="sans" font-size="44" font-weight="800" fill="${t.text}">Musique</text>
+<text x="690" y="138" class="sans" font-size="20" fill="${t.muted}">L'électro et le hardstyle, c'est ma passion.</text>
+<text x="1140" y="96" text-anchor="end" class="mono" font-size="14" font-weight="700" letter-spacing="2" fill="${t.accent}">150 BPM</text>
+${tags}
+`, `
+  .bar { transform-box: fill-box; transform-origin: bottom; animation: beat 0.4s ease-out infinite; }
+  @keyframes beat { 0% { transform: scaleY(1); } 30% { transform: scaleY(0.45); } 100% { transform: scaleY(1); } }`);
+};
+
 // ─────────────────────────────────────────────────────────────── stack
 
 const STACK = [
@@ -437,6 +475,7 @@ for (const [mode, t] of Object.entries(THEMES)) {
     write(`huracraft-${mode}.svg`, huracraft());
     write(`herocrafts-${mode}.svg`, herocrafts(t));
     write(`stack-${mode}.svg`, stack(t));
+    write(`music-${mode}.svg`, music(t));
 }
 
 // Nouveau numéro de version dans le README, pour que GitHub ne serve pas d'anciennes images en cache.
