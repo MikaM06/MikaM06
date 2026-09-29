@@ -257,7 +257,7 @@ const undercraft = (t) => server(t, {
     name: 'Undercraft',
     tagline: 'Là où tout a commencé.',
     lines: ['Mon serveur avant EarthQuest, où j\'ai écrit', 'mes premiers plugins et outils de modération.'],
-    facts: [['RÔLE', 'Fondateur'], ['STATUT', 'Fermé en 2024'], ['SUITE', 'EarthQuest']],
+    facts: [['RÔLE', 'Fondateur'], ['STRUCTURE', 'Marque déposée'], ['STATUT', 'Fermé en 2024'], ['SUITE', 'EarthQuest']],
 });
 
 // ─────────────────────────────────────────────────────────────── huracraft (rétro)
