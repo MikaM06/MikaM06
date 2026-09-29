@@ -272,8 +272,10 @@ const pixelFlat = (text, x0, y0, size, color, shadow) => {
                 if (bit === '1') {
                     const x = x0 + (i * 6 + c) * size;
                     const y = y0 + r * size;
-                    back += `<rect x="${x + size}" y="${y + size}" width="${size}" height="${size}" fill="${shadow}"/>`;
-                    front += `<rect x="${x}" y="${y}" width="${size}" height="${size}" fill="${color}"/>`;
+                    const fg = typeof color === 'function' ? color(i) : color;
+                    const bg = typeof shadow === 'function' ? shadow(i) : shadow;
+                    back += `<rect x="${x + size}" y="${y + size}" width="${size}" height="${size}" fill="${bg}"/>`;
+                    front += `<rect x="${x}" y="${y}" width="${size}" height="${size}" fill="${fg}"/>`;
                 }
             });
         });
@@ -285,6 +287,12 @@ const pixelFlat = (text, x0, y0, size, color, shadow) => {
 const mcText = (x, y, text, color, shadow, size = 20, anchor = 'start') =>
     `<text x="${x + 2}" y="${y + 2}" text-anchor="${anchor}" class="mono" font-size="${size}" font-weight="700" fill="${shadow}">${esc(text)}</text>` +
     `<text x="${x}" y="${y}" text-anchor="${anchor}" class="mono" font-size="${size}" font-weight="700" fill="${color}">${esc(text)}</text>`;
+
+const mix = (a, b, k) => '#' + [0, 2, 4].map((o) => {
+    const v = Math.round(parseInt(a.slice(1 + o, 3 + o), 16) * (1 - k) + parseInt(b.slice(1 + o, 3 + o), 16) * k);
+    return v.toString(16).padStart(2, '0');
+}).join('');
+const quarter = (c) => mix(c, '#000000', 0.75);
 
 const SWORD = [
     '.............ooo',
@@ -304,25 +312,29 @@ const SWORD = [
     'oyyo............',
     'ooo.............',
 ];
-const SWORD_COLORS = { o: '#1B1B1B', w: '#F2F2F2', g: '#A8A8A8', y: '#E0A526', h: '#6B4423' };
+const SWORD_COLORS = { o: '#0B0B12', w: '#A8FFF6', g: '#2FC9C0', y: '#AA00AA', h: '#6B4423' };
 
 const huracraft = () => {
     const w = 1200;
     const h = 240;
     const cell = 24;
-    const dirt = ['#3B2A1C', '#46321F', '#4F3A24', '#352518', '#5A4129'];
+    const obsidian = ['#14101E', '#1B1428', '#231A33', '#0F0B17', '#2A1F3D'];
     let bg = '';
     for (let y = 0; y < h; y += cell) {
         for (let x = 0; x < w; x += cell) {
             const n = (Math.imul(x + 7, 73856093) ^ Math.imul(y + 13, 19349663)) >>> 0;
-            bg += `<rect x="${x}" y="${y}" width="${cell}" height="${cell}" fill="${dirt[(n >>> 7) % dirt.length]}"/>`;
+            bg += `<rect x="${x}" y="${y}" width="${cell}" height="${cell}" fill="${obsidian[(n >>> 7) % obsidian.length]}"/>`;
         }
     }
     let sword = '';
+    let glint = '';
     SWORD.forEach((row, r) => {
         [...row].forEach((ch, c) => {
             if (ch !== '.') {
                 sword += `<rect x="${60 + c * 8}" y="${56 + r * 8}" width="8" height="8" fill="${SWORD_COLORS[ch]}"/>`;
+                if (ch === 'w' || ch === 'g') {
+                    glint += `<rect class="glint" x="${60 + c * 8}" y="${56 + r * 8}" width="8" height="8" fill="#FF55FF" style="animation-delay:${((15 - r) * 0.08).toFixed(2)}s"/>`;
+                }
             }
         });
     });
@@ -330,20 +342,23 @@ const huracraft = () => {
         `<rect x="${1086 + i * 10}" y="${58 - i * 6}" width="7" height="${10 + i * 6}" fill="#3F3F3F"/>`).join('');
     return svg(w, h, `
 ${bg}
-<rect width="${w}" height="${h}" fill="#000000" opacity="0.35"/>
-<rect x="24" y="24" width="${w - 48}" height="${h - 48}" fill="#000000" opacity="0.3" stroke="#808080" stroke-width="3"/>
+<rect width="${w}" height="${h}" fill="#000000" opacity="0.15"/>
+<rect x="24" y="24" width="${w - 48}" height="${h - 48}" fill="#000000" opacity="0.3" stroke="#AA00AA" stroke-width="3"/>
 <rect x="48" y="44" width="152" height="152" fill="#000000" opacity="0.35"/>
 ${sword}
-${pixelFlat('HURACRAFT', 236, 52, 6, '#FFAA00', '#3F2A00')}
-${mcText(236, 138, 'PvP Factions · Vanilla 1.8.9+', '#FFFF55', '#3F3F15')}
-${mcText(236, 174, 'Fondé par MikaM06', '#AAAAAA', '#2A2A2A', 18)}
+${glint}
+${pixelFlat('HURACRAFT', 236, 52, 6, (i) => mix('#FF55FF', '#55FFFF', i / 8), (i) => quarter(mix('#FF55FF', '#55FFFF', i / 8)))}
+${mcText(236, 138, 'PvP Factions · Vanilla 1.8.9+', '#55FFFF', '#153F3F')}
+${mcText(236, 174, 'Fondé par MikaM06', '#FF55FF', '#3F153F', 18)}
 ${bars}
 <text x="1066" y="80" text-anchor="middle" class="mono" font-size="22" font-weight="700" fill="#FF5555">✕</text>
 ${mcText(1130, 138, 'Fermé en 2021', '#FF5555', '#3F1515', 18, 'end')}
 <text x="236" y="208" class="mono blink" font-size="14" font-weight="700" fill="#555555">Impossible de se connecter au serveur</text>
 `, `
   .blink { animation: blink 2s steps(1) infinite; }
-  @keyframes blink { 50% { opacity: 0.3; } }`);
+  @keyframes blink { 50% { opacity: 0.3; } }
+  .glint { opacity: 0; animation: glint 2.4s ease-in-out infinite; }
+  @keyframes glint { 0%, 60%, 100% { opacity: 0; } 30% { opacity: 0.55; } }`);
 };
 
 // ─────────────────────────────────────────────────────────────── stack
