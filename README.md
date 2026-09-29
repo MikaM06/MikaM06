@@ -23,7 +23,7 @@ Je code autour de Minecraft depuis des années : des plugins, des mods, des outi
 
 <p align="center"><picture>
   <source media="(prefers-color-scheme: light)" srcset="./assets/section-earthquest-light.svg"/>
-  <img src="./assets/section-earthquest-dark.svg" width="100%" alt="EarthQuest"/>
+  <img src="./assets/section-earthquest-dark.svg" width="100%" alt="VoxelMind"/>
 </picture></p>
 
 <p align="center"><a href="https://www.earthquest.fr"><picture>

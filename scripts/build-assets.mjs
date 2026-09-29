@@ -150,7 +150,7 @@ ${tail}
 
 const SECTIONS = [
     ['about', 'À propos'],
-    ['earthquest', 'EarthQuest'],
+    ['earthquest', 'VoxelMind'],
     ['before', 'Avant EarthQuest'],
     ['projects', 'Projets perso'],
     ['stack', 'Stack'],
