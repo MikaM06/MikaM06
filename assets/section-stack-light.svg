@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="110" viewBox="0 0 1200 110">
+<style>
+  .sans { font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  .mono { font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace; }
+  
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+
+<text x="600" y="38" text-anchor="middle" class="mono" font-size="14" letter-spacing="3" fill="#1C7ED6">04 / STACK</text>
+<text x="600" y="84" text-anchor="middle" class="sans" font-size="34" font-weight="700" fill="#1F2328">Ce avec quoi je travaille</text>
+
+</svg>

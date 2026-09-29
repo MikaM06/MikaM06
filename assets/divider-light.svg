@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="40" viewBox="0 0 1200 40">
+<style>
+  .sans { font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  .mono { font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace; }
+  
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+
+<line x1="0" y1="20" x2="560" y2="20" stroke="#D0D7DE"/>
+<rect x="570" y="14" width="12" height="12" rx="2" fill="#1C7ED6" opacity="0.4"/>
+<rect x="594" y="14" width="12" height="12" rx="2" fill="#1C7ED6"/>
+<rect x="618" y="14" width="12" height="12" rx="2" fill="#1C7ED6" opacity="0.4"/>
+<line x1="640" y1="20" x2="1200" y2="20" stroke="#D0D7DE"/>
+
+</svg>

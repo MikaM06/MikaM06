@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="590" height="220" viewBox="0 0 590 220">
+<style>
+  .sans { font-family: 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  .mono { font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace; }
+  
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; } }
+</style>
+
+<rect x="1" y="1" width="588" height="218" rx="14" fill="#161B22" stroke="#30363D"/>
+<rect x="28" y="28" width="44" height="44" rx="10" fill="#3E9CDE"/>
+<text x="50" y="58" text-anchor="middle" class="mono" font-size="20" font-weight="700" fill="#0D1117">L</text>
+<text x="88" y="50" class="sans" font-size="24" font-weight="700" fill="#E6EDF3">Launcher</text>
+<text x="88" y="72" class="mono" font-size="12" letter-spacing="1.5" fill="#8B949E">RUST · TAURI 2 · SVELTE 5</text>
+<rect x="426.8" y="30" width="135.2" height="24" rx="12" fill="none" stroke="#3E9CDE"/>
+<text x="494.4" y="46" text-anchor="middle" class="mono" font-size="11" letter-spacing="1" fill="#3E9CDE">EN PRODUCTION</text>
+<text x="28" y="122" class="sans" font-size="17" fill="#E6EDF3">Le launcher officiel : installe, met à jour et lance le</text>
+<text x="28" y="148" class="sans" font-size="17" fill="#E6EDF3">jeu en un clic, réécrit de zéro en Rust.</text>
+<text x="28" y="194" class="mono" font-size="12" letter-spacing="1.5" fill="#3E9CDE">EARTHQUEST → earthquest.fr</text>
+
+</svg>
